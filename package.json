@@ -1,0 +1,19 @@
+{
+  "name": "zeck-frontend-templates",
+  "version": "1.0.0",
+  "description": "Conjunto de templates frontend da CLI zeck.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/litetechnology/zeck-frontend-templates.git"
+  },
+  "author": "https://github.com/odutradev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/litetechnology/zeck-frontend-templates/issues"
+  },
+  "homepage": "https://github.com/litetechnology/zeck-frontend-templates#readme"
+}
