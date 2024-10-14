@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/litetechnology/zeck-frontend-templates/issues"
   },
-  "homepage": "https://github.com/litetechnology/zeck-frontend-templates#readme"
+  "homepage": "https://github.com/litetechnology/zeck-frontend-templates#readme",
+  "dependencies": {
+    "lerna": "^8.1.8"
+  }
 }
