@@ -1,9 +1,10 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import eslintPlugin from "vite-plugin-eslint";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import path from "path";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), eslintPlugin()],
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, './src/components'),
