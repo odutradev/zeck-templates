@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import api from "../utils/functions/api";
+import api from "@utils/functions/api";
 
 export const getUser = async () => {
     try {

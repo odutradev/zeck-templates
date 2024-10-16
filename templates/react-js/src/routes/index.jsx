@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 
-import Error from "../pages/error";
-import Main from '../pages/main';
+import Error from "@pages/error";
+import Main from "@pages/main";
 
 const Router = () => {
     return(
