@@ -1,7 +1,6 @@
 import { Bounce } from "react-toastify";
 
 const config = {
-    baseURL: "https://api.lab.odutra.com/v1/",
     toast: {
         hideProgressBar: false,
         pauseOnFocusLoss: true,

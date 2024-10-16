@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-import config from '../config';
-
 var token = localStorage.getItem('token');
 
 const api = axios.create({
-  baseURL: config.baseURL,
+  baseURL: import.meta.env.VITE_BASEURL,
   headers: {
     'Content-Type': 'application/json',
     'authorization': token
