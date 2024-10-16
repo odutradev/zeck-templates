@@ -1,8 +1,8 @@
 const Error = () => {
     return (
-        <main>
+        <main className="container">
             <h1>Page Not Found</h1>
-            <div className="card">
+            <div>
                 <button onClick={() => {
                     window.location.href = '/'
                 }}>

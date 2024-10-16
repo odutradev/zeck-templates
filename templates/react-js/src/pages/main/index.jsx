@@ -4,9 +4,9 @@ const Main = () => {
     const [count, setCount] = useState(0);
 
     return (
-        <main>
+        <main className="container">
             <h1>React Frontend Template + Zeck</h1>
-            <div className="card">
+            <div>
                 <button onClick={() => setCount((count) => count + 1)}>
                 count is {count}
                 </button>
