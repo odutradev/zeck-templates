@@ -1,0 +1,12 @@
+{
+    "frontend":[
+        {
+            "name":"react-js",
+            "url":"https://github.com/litetechnology/zeck-frontend-templates/tree/master/templates/react-js",
+            "description":"https://github.com/litetechnology/zeck-frontend-templates/tree/master/templates/react-js",
+            "tags":["react", "javascript", "react-toastify"],
+            "modules":[]
+        }
+    ],
+    "backend":[]
+}
