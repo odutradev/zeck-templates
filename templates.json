@@ -2,8 +2,8 @@
     "frontend":[
         {
             "name":"react-js",
-            "url":"https://github.com/litetechnology/zeck-frontend-templates/tree/master/templates/react-js",
-            "description":"https://github.com/litetechnology/zeck-frontend-templates/tree/master/templates/react-js",
+            "url":"https://api.github.com/repos/litetechnology/zeck-frontend-templates/contents/templates/react-js?ref=master",
+            "description":"react project",
             "tags":["react", "javascript", "react-toastify"],
             "modules":[]
         }
