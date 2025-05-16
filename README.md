@@ -1,6 +1,6 @@
-# Zeck Frontend Templates
+# Zeck Templates
 
-**Zeck Frontend Templates** is a collection of templates for frameworks and libraries used in **zeck-cli** to facilitate ease of use.
+**Zeck Templates** is a collection of templates for frameworks and libraries used in **zeck-cli** to facilitate ease of use.
 
 ## Overview
 
@@ -28,5 +28,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Authors
 
-- [Lite Technology Ltda](https://github.com/litetechnology) - Supporting Company
 - [João Dutra Dev](https://github.com/odutradev) - Project Author
