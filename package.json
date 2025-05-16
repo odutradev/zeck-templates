@@ -1,25 +1,33 @@
 {
-  "name": "zeck-frontend-templates",
+  "name": "zeck-templates",
   "version": "1.0.0",
-  "description": "Conjunto de templates frontend da CLI zeck.",
-  "main": "index.js",
+  "description": "Ready-to-use Boilerplate Set",
+  "license": "MIT",
+  "author": "João Dutra <https://github.com/odutradev>",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/litetechnology/zeck-frontend-templates.git"
+    "url": "https://github.com/odutradev/zeck-templates.git"
   },
-  "author": "https://github.com/odutradev",
-  "license": "ISC",
+  "homepage": "https://github.com/odutradev/zeck-templates#readme",
   "bugs": {
-    "url": "https://github.com/litetechnology/zeck-frontend-templates/issues"
+    "url": "https://github.com/odutradev/zeck-templates/issues"
   },
-  "homepage": "https://github.com/litetechnology/zeck-frontend-templates#readme",
   "dependencies": {
     "lerna": "^8.1.8"
   },
   "workspaces": [
     "templates/*"
+  ],
+  "keywords": [
+    "zeck",
+    "cli",
+    "production-cli",
+    "dev",
+    "developent",
+    "zeck-cli",
+    "project"
   ]
 }
