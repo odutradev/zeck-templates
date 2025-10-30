@@ -2,10 +2,33 @@
     "frontend":[
         {
             "name":"react-js",
-            "url":"https://api.github.com/repos/litetechnology/zeck-frontend-templates/contents/templates/react-js?ref=master",
+            "url":"https://github.com/odutradev/zeck-templates/tree/master/templates/react-js",
             "description":"react project",
-            "tags":["react", "javascript", "react-toastify"],
-            "modules":[]
+            "modules":[
+                {
+                    "name":"redux",
+                    "description":"..."
+                },
+                                {
+                    "name":"styled-components",
+                    "description":"..."
+                },
+            ]
+        },
+        {
+            "name":"react-ts",
+            "url":"https://github.com/odutradev/zeck-templates/tree/master/templates/react-js",
+            "description":"react project",
+            "modules":[
+                {
+                    "name":"redux",
+                    "description":"..."
+                },
+                                {
+                    "name":"styled-components",
+                    "description":"..."
+                },
+            ]
         }
     ],
     "backend":[]
