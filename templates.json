@@ -9,10 +9,10 @@
                     "name":"redux",
                     "description":"..."
                 },
-                                {
+                {
                     "name":"styled-components",
                     "description":"..."
-                },
+                }
             ]
         },
         {
@@ -24,10 +24,10 @@
                     "name":"redux",
                     "description":"..."
                 },
-                                {
+                {
                     "name":"styled-components",
                     "description":"..."
-                },
+                }
             ]
         }
     ],
