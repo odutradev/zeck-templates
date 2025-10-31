@@ -1,35 +1,82 @@
 {
-    "frontend":[
+  "frontend": [
+    {
+      "name": "react-js",
+      "url": "templates/frontend/react-js",
+      "description": "A React.js boilerplate with Vite, ESLint, and a pre-configured project structure.",
+      "modules": [
         {
-            "name":"react-js",
-            "url":"https://github.com/odutradev/zeck-templates/tree/master/templates/react-js",
-            "description":"react project",
-            "modules":[
-                {
-                    "name":"redux",
-                    "description":"..."
-                },
-                {
-                    "name":"styled-components",
-                    "description":"..."
-                }
-            ]
+          "name": "redux",
+          "description": "State management with Redux Toolkit"
         },
         {
-            "name":"react-ts",
-            "url":"https://github.com/odutradev/zeck-templates/tree/master/templates/react-js",
-            "description":"react project",
-            "modules":[
-                {
-                    "name":"redux",
-                    "description":"..."
-                },
-                {
-                    "name":"styled-components",
-                    "description":"..."
-                }
-            ]
+          "name": "styled-components",
+          "description": "CSS-in-JS styling library"
+        },
+        {
+          "name": "react-router",
+          "description": "Declarative routing for React (already included)"
         }
-    ],
-    "backend":[]
+      ]
+    },
+    {
+      "name": "react-ts",
+      "url": "templates/frontend/react-ts",
+      "description": "A React.js boilerplate with TypeScript, Vite, and ESLint.",
+      "modules": [
+        {
+          "name": "redux-toolkit-ts",
+          "description": "State management with Redux Toolkit (TypeScript)"
+        },
+        {
+          "name": "styled-components-ts",
+          "description": "CSS-in-JS styling library (with TypeScript)"
+        },
+        {
+          "name": "zod",
+          "description": "TypeScript-first schema validation"
+        }
+      ]
+    }
+  ],
+  "backend": [
+    {
+      "name": "express-js",
+      "url": "templates/backend/express-js",
+      "description": "An Express.js boilerplate for building RESTful APIs with JavaScript.",
+      "modules": [
+        {
+          "name": "mongoose",
+          "description": "MongoDB object modeling tool"
+        },
+        {
+          "name": "jsonwebtoken",
+          "description": "Authentication using JSON Web Tokens (JWT)"
+        },
+        {
+          "name": "cors",
+          "description": "Enable Cross-Origin Resource Sharing"
+        }
+      ]
+    },
+    {
+      "name": "express-ts",
+      "url": "templates/backend/express-ts",
+      "description": "An Express.js boilerplate for building RESTful APIs with TypeScript.",
+      "modules": [
+        {
+          "name": "prisma",
+          "description": "Next-generation ORM for TypeScript and Node.js"
+        },
+        {
+          "name": "jsonwebtoken",
+          "description": "Authentication using JSON Web Tokens (JWT)"
+        },
+        {
+          "name": "class-validator",
+          "description": "Decorator-based validation for TypeScript"
+        }
+      ]
+    }
+  ]
 }
