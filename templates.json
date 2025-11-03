@@ -11,6 +11,7 @@
         },
         {
           "name": "styled-components",
+          "path": "./.modules/styled-components.json",
           "description": "CSS-in-JS styling library"
         },
         {

@@ -1,0 +1,20 @@
+{
+  "instructions": [
+    {
+      "path": "src/styles/GlobalStyles.js",
+      "action": "CREATE_FILE",
+      "content": "import { createGlobalStyle } from 'styled-components';\n\nconst GlobalStyles = createGlobalStyle`\n  * {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n  }\n\n  body {\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n  }\n\n  button {\n    cursor: pointer;\n  }\n`;\n\nexport default GlobalStyles;"
+    },
+    {
+      "path": "src/main.jsx",
+      "action": "INSERT_IMPORT",
+      "content": "import GlobalStyles from \"./styles/GlobalStyles\";"
+    },
+    {
+      "path": "src/main.jsx",
+      "action": "INSERT_AFTER",
+      "pattern": "<StrictMode>",
+      "content": "     <GlobalStyles />"
+    }
+  ]
+}
