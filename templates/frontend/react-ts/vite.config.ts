@@ -5,7 +5,7 @@ import path from 'path';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const requiredVars = ['VITE_PRODUCTION', 'VITE_BASEURL'];
+  const requiredVars:string[] = [];
   requiredVars.forEach((key) => {
     if (!env[key]) {
      throw new Error(chalk.red(`The environment variable ${chalk.bold(key)} is not defined.`));
