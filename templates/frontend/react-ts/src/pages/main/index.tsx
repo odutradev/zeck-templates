@@ -4,6 +4,7 @@ import logo from '@assets/imgs/logo.svg'
 
 const Main = () => {
   const [count, setCount] = useState(0);
+  const modules = ['React', 'TypeScript', 'Vite'];
 
   return (
     <main className="main-container">
@@ -16,6 +17,14 @@ const Main = () => {
       <h1 className="main-title">
         Zeck React Typescript Boilerplate + Vite
       </h1>
+      
+      <div className="chips-container">
+        {modules.map((module) => (
+          <span key={module} className="chip">
+            {module}
+          </span>
+        ))}
+      </div>
       
       <div className="button-container">
         <button onClick={() => setCount((count) => count + 1)}>
