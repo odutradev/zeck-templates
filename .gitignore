@@ -25,6 +25,7 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+package-lock.json
 
 # react-js ignore
 templates/react-js/node_modules
