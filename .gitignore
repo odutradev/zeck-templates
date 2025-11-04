@@ -10,6 +10,8 @@ scripts/flow/*/.flowconfig
 _SpecRunner.html
 __benchmarks__
 build/
+build 
+dist
 remote-repo/
 coverage/
 .module-cache
@@ -26,6 +28,9 @@ chrome-user-data
 *.swp
 *.swo
 package-lock.json
+
+zeck-templates-merged.txt
+merged-output.txt 
 
 # react-js ignore
 templates/react-js/node_modules

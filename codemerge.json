@@ -1,0 +1,41 @@
+{
+  "projectName": "zeck-templates",
+  "outputPath": "zeck-templates-merged.txt",
+  "port": 9876,
+  "useGitignore": true,
+  "ignorePatterns": [
+    "node_modules",
+    "node_modules/**",
+    ".git",
+    ".git/**",
+    "dist",
+    "dist/**",
+    "build",
+    "build/**",
+    "**/*.log",
+    "package-lock.json",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    "codemerge.json",
+    "merged-output.txt",
+    ".env",
+    ".env.*",
+    "**/.DS_Store",
+    "coverage",
+    "coverage/**",
+    ".next",
+    ".next/**",
+    ".nuxt",
+    ".nuxt/**",
+    ".vscode",
+    ".idea"
+  ],
+  "includePatterns": [
+    "**/*.ts",
+    "**/*.js",
+    "**/*.tsx",
+    "**/*.jsx",
+    "**/*.json",
+    "**/*.md"
+  ]
+}
