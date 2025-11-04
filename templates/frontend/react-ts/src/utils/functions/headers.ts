@@ -9,13 +9,3 @@ export const setAuthToken = (token?: string) => {
     delete api.defaults.headers.common['authorization'];
   }
 };
-
-export const setSpaceToken = (space?: string) => {
-  if (space) {
-    localStorage.setItem('space', space);
-    api.defaults.headers.common['space'] = space;
-  } else {
-    localStorage.removeItem('space');
-    delete api.defaults.headers.common['space'];
-  }
-};

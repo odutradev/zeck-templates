@@ -4,7 +4,6 @@ import InitialRoute from "@routes/components/initialRoute";
 import NotFound from "@pages/notFound";
 import Main from "@pages/main";
 
-
 const routes = [
     {
         path: "/",

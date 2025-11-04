@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import './styles.css';
+
 import logo from '@assets/imgs/logo.svg'
+import './styles.css';
 
 const Main = () => {
+  
   const [count, setCount] = useState(0);
   const modules = ['React', 'TypeScript', 'Vite'];
 
