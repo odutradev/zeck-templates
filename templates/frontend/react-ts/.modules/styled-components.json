@@ -1,0 +1,65 @@
+{
+  "instructions": [
+    {
+      "path": "src/styles/globalStyles.ts",
+      "action": "CREATE_FILE",
+      "content": "import { createGlobalStyle } from \"styled-components\";\n\nconst GlobalStyles = createGlobalStyle`\n  *, *::before, *::after {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n  }\n`;\n\nexport default GlobalStyles;"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_IMPORT",
+      "content": "import GlobalStyles from '@styles/globalStyles';"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_AFTER",
+      "content": "<GlobalStyles />",
+      "pattern": "<Router />"
+    },
+    {
+      "path": "src/pages/main/styles.ts",
+      "action": "CREATE_FILE",
+      "content": "import styled from 'styled-components';\n\nexport const MainContainer = styled.main`\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  height: 90vh;\n  width: 100%;\n  background-color: #f8f9fa;\n  box-sizing: border-box;\n  font-family: Arial, sans-serif;\n  text-align: center;\n  gap: 24px;\n`;\n\nexport const MainLogo = styled.img`\n  height: 10rem;\n  max-width: 90%;\n`;\n\nexport const MainTitle = styled.h1`\n  font-size: 2.25rem;\n  font-weight: 600;\n  color: #333;\n  margin: 0;\n`;\n\nexport const ChipsContainer = styled.div`\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  gap: 10px;\n`;\n\nexport const Chip = styled.span`\n  background-color: #e8f7fe;\n  color: #0c5a81;\n  padding: 6px 12px;\n  border-radius: 16px;\n  font-size: 0.875rem;\n  font-weight: 500;\n`;\n\nexport const ButtonContainer = styled.div`\n  margin-top: 16px;\n`;\n\nexport const StyledButton = styled.button`\n  font-size: 1rem;\n  font-weight: 500;\n  padding: 12px 24px;\n  border-radius: 8px;\n  border: 1px solid transparent;\n  background-color: #17B3F6;\n  color: #ffffff;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n\n  &:hover,\n  &:focus {\n    background-color: #56E0A0;\n    outline: none;\n  }\n`;",
+      "pattern": "import { useState } from 'react';\n\nimport logo from '@assets/imgs/logo.svg'\nimport './styles.css';\n\nconst Main = () => {\n  \n  const [count, setCount] = useState(0);\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  return (\n    <main className=\"main-container\">\n      <img \n        src={logo}\n        className=\"main-logo\" \n        alt=\"Zeck Logo\" \n      />\n      \n      <h1 className=\"main-title\">\n        Zeck React Typescript Boilerplate + Vite\n      </h1>\n      \n      <div className=\"chips-container\">\n        {modules.map((module) => (\n          <span key={module} className=\"chip\">\n            {module}\n          </span>\n        ))}\n      </div>\n      \n      <div className=\"button-container\">\n        <button onClick={() => setCount((count) => count + 1)}>\n          count is {count}\n        </button>\n      </div>\n    </main>\n  );\n};\n\nexport default Main;"
+    },
+    {
+      "path": "src/pages/main/styles.css",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "DELETE_FILE",
+      "pattern": "import { useState } from 'react';\n\nimport logo from '@assets/imgs/logo.svg'\nimport './styles.css';\n\nconst Main = () => {\n  \n  const [count, setCount] = useState(0);\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  return (\n    <main className=\"main-container\">\n      <img \n        src={logo}\n        className=\"main-logo\" \n        alt=\"Zeck Logo\" \n      />\n      \n      <h1 className=\"main-title\">\n        Zeck React Typescript Boilerplate + Vite\n      </h1>\n      \n      <div className=\"chips-container\">\n        {modules.map((module) => (\n          <span key={module} className=\"chip\">\n            {module}\n          </span>\n        ))}\n      </div>\n      \n      <div className=\"button-container\">\n        <button onClick={() => setCount((count) => count + 1)}>\n          count is {count}\n        </button>\n      </div>\n    </main>\n  );\n};\n\nexport default Main;",
+      "replacement": "import { useState } from 'react';  import { MainContainer, MainLogo, MainTitle, ChipsContainer, Chip, ButtonContainer, StyledButton } from './styles'; import logo from '@assets/imgs/logo.svg'  const Main = () => {      const [count, setCount] = useState(0);   const modules = ['React', 'TypeScript', 'Vite'];    return (     <MainContainer>       <MainLogo          src={logo}         alt=\"Zeck Logo\"        />              <MainTitle>         Zeck React Typescript Boilerplate + Vite       </MainTitle>              <ChipsContainer>         {modules.map((module) => (           <Chip key={module} className=\"chip\">             {module}           </Chip>         ))}       </ChipsContainer>              <ButtonContainer>         <StyledButton onClick={() => setCount((count) => count + 1)}>           count is {count}         </StyledButton>       </ButtonContainer>     </MainContainer>   ); };  export default Main;"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"styled-components\": \"^6.1.15\",",
+      "pattern": "  \"dependencies\": {"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { useState } from 'react';\n\nimport { MainContainer, MainLogo, MainTitle, ChipsContainer, Chip, ButtonContainer, StyledButton } from './styles';\nimport logo from '@assets/imgs/logo.svg'\n\nconst Main = () => {\n  \n  const [count, setCount] = useState(0);\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  return (\n    <MainContainer>\n      <MainLogo \n        src={logo}\n        alt=\"Zeck Logo\" \n      />\n      \n      <MainTitle>\n        Zeck React Typescript Boilerplate + Vite\n      </MainTitle>\n      \n      <ChipsContainer>\n        {modules.map((module) => (\n          <Chip key={module} className=\"chip\">\n            {module}\n          </Chip>\n        ))}\n      </ChipsContainer>\n      \n      <ButtonContainer>\n        <StyledButton onClick={() => setCount((count) => count + 1)}>\n          count is {count}\n        </StyledButton>\n      </ButtonContainer>\n    </MainContainer>\n  );\n};\n\nexport default Main;"
+    },
+    {
+      "path": "src/pages/notFound/styles.css",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/pages/notFound/styles.ts",
+      "action": "CREATE_FILE",
+      "content": "import styled from 'styled-components';\n\nexport const Container = styled.div`\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  min-height: 100vh;\n  width: 100%;\n  padding: 16px;\n  background-color: #f8f9fa;\n  box-sizing: border-box;\n  font-family: Arial, sans-serif;\n`;\n\nexport const ContentWrapper = styled.div`\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  gap: 16px;\n`;\n\nexport const Title = styled.h1`\n  font-size: 8rem;\n  font-weight: bold;\n  color: #007bff;\n  margin: 0;\n  line-height: 1.1;\n\n  @media (max-width: 768px) {\n    font-size: 6rem;\n  }\n`;\n\nexport const Message = styled.p`\n  font-size: 1.5rem;\n  color: #555;\n  margin: 0;\n  max-width: 400px;\n\n  @media (max-width: 768px) {\n    font-size: 1.25rem;\n  }\n`;\n\nexport const ButtonLink = styled.a`\n  margin-top: 24px;\n  padding: 10px 24px;\n  font-size: 1rem;\n  color: #fff;\n  background-color: #007bff;\n  border: none;\n  border-radius: 4px;\n  text-decoration: none;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n\n  &:hover,\n  &:focus {\n    background-color: #0056b3;\n  }\n`;"
+    },
+    {
+      "path": "src/pages/notFound/index.tsx",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/pages/notFound/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { Container, ContentWrapper, Title, Message, ButtonLink } from './styles';\n\nconst NotFound = () => {\n  return (\n    <Container>\n      <ContentWrapper>\n        <Title>\n          404\n        </Title>\n        <Message>\n          Sorry, the page you are looking for does not exist.\n        </Message>\n        <ButtonLink href=\"/\">\n          Back to Home\n        </ButtonLink>\n      </ContentWrapper>\n    </Container>\n  );\n};\n\nexport default NotFound;"
+    }
+  ]
+}
