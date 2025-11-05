@@ -26,16 +26,9 @@
       "description": "A React.js boilerplate with TypeScript, Vite, and ESLint.",
       "modules": [
         {
-          "name": "redux-toolkit-ts",
-          "description": "State management with Redux Toolkit (TypeScript)"
-        },
-        {
           "name": "styled-components-ts",
-          "description": "CSS-in-JS styling library (with TypeScript)"
-        },
-        {
-          "name": "zod",
-          "description": "TypeScript-first schema validation"
+          "description": "CSS-in-JS styling library",
+          "path": "./.modules/styled-components.json"
         }
       ]
     }
