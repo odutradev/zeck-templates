@@ -1,4 +1,9 @@
-/* Styles for the page container (fullscreen) */
+body{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 .notfound-page-container {
   display: flex;
   flex-direction: column;
@@ -12,7 +17,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* Error content container */
 .error-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -54,7 +58,6 @@
   background-color: #0056b3;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .error-title {
     font-size: 6rem;
