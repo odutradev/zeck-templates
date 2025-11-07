@@ -29,6 +29,11 @@
           "name": "styled-components-ts",
           "description": "CSS-in-JS styling library",
           "path": "./.modules/styled-components.json"
+        },
+        {
+          "name": "mui-material-ts",
+          "description": "..",
+          "path": "./.modules/mui-material.json"
         }
       ]
     }

@@ -1,0 +1,99 @@
+{
+  "instructions": [
+    {
+      "path": "src/styles/globalStyles.ts",
+      "action": "CREATE_FILE",
+      "content": "import { createGlobalStyle } from \"styled-components\";\n\nconst GlobalStyles = createGlobalStyle`\n  *, *::before, *::after {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n  }\n`;\n\nexport default GlobalStyles;"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_IMPORT",
+      "content": "import GlobalStyles from '@styles/globalStyles';"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_AFTER",
+      "content": "      <GlobalStyles />\n",
+      "pattern": "<Router />"
+    },
+    {
+      "path": "src/pages/main/styles.ts",
+      "action": "CREATE_FILE",
+      "content": "import { Box, Typography, Chip } from '@mui/material';\nimport { styled } from '@mui/material/styles';\n\nexport const MainContainer = styled(Box)(({ theme }) => ({\n  display: 'flex',\n  flexDirection: 'column',\n  alignItems: 'center',\n  justifyContent: 'center',\n  minHeight: '100vh',\n  padding: theme.spacing(4),\n}));\n\nexport const Logo = styled('img')({\n  height: '6em',\n  padding: '1.5em',\n  willChange: 'filter',\n  transition: 'filter 300ms',\n  '&:hover': {\n    filter: 'drop-shadow(0 0 2em #646cffaa)',\n  },\n});\n\nexport const Title = styled(Typography)(({ theme }) => ({\n  fontSize: '3.2em',\n  lineHeight: 1.1,\n  textAlign: 'center',\n  marginBottom: theme.spacing(3),\n  [theme.breakpoints.down('sm')]: {\n    fontSize: '2em',\n  },\n}));\n\nexport const ChipsContainer = styled(Box)(({ theme }) => ({\n  display: 'flex',\n  gap: theme.spacing(1),\n  flexWrap: 'wrap',\n  justifyContent: 'center',\n  marginBottom: theme.spacing(4),\n}));\n\nexport const StyledChip = styled(Chip)(({ theme }) => ({\n  fontSize: '0.9em',\n  fontWeight: 500,\n  padding: theme.spacing(0.5, 1),\n  backgroundColor: theme.palette.background.paper,\n  border: `1px solid ${theme.palette.divider}`,\n}));\n\nexport const ButtonContainer = styled(Box)(({ theme }) => ({\n  display: 'flex',\n  gap: theme.spacing(2),\n  marginTop: theme.spacing(2),\n}));",
+      "pattern": "import { useState } from 'react';\n\nimport logo from '@assets/imgs/logo.svg'\nimport './styles.css';\n\nconst Main = () => {\n  \n  const [count, setCount] = useState(0);\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  return (\n    <main className=\"main-container\">\n      <img \n        src={logo}\n        className=\"main-logo\" \n        alt=\"Zeck Logo\" \n      />\n      \n      <h1 className=\"main-title\">\n        Zeck React Typescript Boilerplate + Vite\n      </h1>\n      \n      <div className=\"chips-container\">\n        {modules.map((module) => (\n          <span key={module} className=\"chip\">\n            {module}\n          </span>\n        ))}\n      </div>\n      \n      <div className=\"button-container\">\n        <button onClick={() => setCount((count) => count + 1)}>\n          count is {count}\n        </button>\n      </div>\n    </main>\n  );\n};\n\nexport default Main;"
+    },
+    {
+      "path": "src/pages/main/styles.css",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "DELETE_FILE",
+      "pattern": "import { useState } from 'react';\n\nimport logo from '@assets/imgs/logo.svg'\nimport './styles.css';\n\nconst Main = () => {\n  \n  const [count, setCount] = useState(0);\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  return (\n    <main className=\"main-container\">\n      <img \n        src={logo}\n        className=\"main-logo\" \n        alt=\"Zeck Logo\" \n      />\n      \n      <h1 className=\"main-title\">\n        Zeck React Typescript Boilerplate + Vite\n      </h1>\n      \n      <div className=\"chips-container\">\n        {modules.map((module) => (\n          <span key={module} className=\"chip\">\n            {module}\n          </span>\n        ))}\n      </div>\n      \n      <div className=\"button-container\">\n        <button onClick={() => setCount((count) => count + 1)}>\n          count is {count}\n        </button>\n      </div>\n    </main>\n  );\n};\n\nexport default Main;",
+      "replacement": "import { useState } from 'react';  import { MainContainer, MainLogo, MainTitle, ChipsContainer, Chip, ButtonContainer, StyledButton } from './styles'; import logo from '@assets/imgs/logo.svg'  const Main = () => {      const [count, setCount] = useState(0);   const modules = ['React', 'TypeScript', 'Vite'];    return (     <MainContainer>       <MainLogo          src={logo}         alt=\"Zeck Logo\"        />              <MainTitle>         Zeck React Typescript Boilerplate + Vite       </MainTitle>              <ChipsContainer>         {modules.map((module) => (           <Chip key={module} className=\"chip\">             {module}           </Chip>         ))}       </ChipsContainer>              <ButtonContainer>         <StyledButton onClick={() => setCount((count) => count + 1)}>           count is {count}         </StyledButton>       </ButtonContainer>     </MainContainer>   ); };  export default Main;"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"@mui/icons-material\": \"^7.3.5\",\n    \"@mui/material\": \"^7.3.5\",\n    \"@mui/styled-engine-sc\": \"^7.3.5\",\n    \"styled-components\": \"^6.1.19\",",
+      "pattern": "  \"dependencies\": {"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { useState } from 'react';\nimport { Button } from '@mui/material';\n\nimport logo from '@assets/imgs/logo.svg';\n\nimport { MainContainer, Logo, Title, ChipsContainer, StyledChip, ButtonContainer } from './styles';\n\nconst Main = () => {\n  const [count, setCount] = useState(0);\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  return (\n    <MainContainer>\n      <Logo \n        src={logo}\n        alt=\"Zeck Logo\" \n      />\n      \n      <Title variant=\"h1\">\n        Zeck React Typescript Boilerplate + Vite\n      </Title>\n      \n      <ChipsContainer>\n        {modules.map((module) => (\n          <StyledChip \n            key={module} \n            label={module}\n          />\n        ))}\n      </ChipsContainer>\n      \n      <ButtonContainer>\n        <Button \n          variant=\"contained\"\n          onClick={() => setCount((count) => count + 1)}\n        >\n          count is {count}\n        </Button>\n      </ButtonContainer>\n    </MainContainer>\n  );\n};\n\nexport default Main;"
+    },
+    {
+      "path": "src/pages/notFound/styles.css",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/pages/notFound/styles.ts",
+      "action": "CREATE_FILE",
+      "content": "import { Box, Typography, Button } from '@mui/material';\nimport { styled } from '@mui/material/styles';\nimport ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';\n\nexport const NotFoundContainer = styled(Box)(({ theme }) => ({\n  display: 'flex',\n  flexDirection: 'column',\n  alignItems: 'center',\n  justifyContent: 'center',\n  minHeight: '100vh',\n  padding: theme.spacing(4),\n  textAlign: 'center',\n}));\n\nexport const ErrorIcon = styled(ErrorOutlineIcon)(({ theme }) => ({\n  fontSize: '8rem',\n  color: theme.palette.primary.main,\n  marginBottom: theme.spacing(2),\n  opacity: 0.8,\n}));\n\nexport const ErrorTitle = styled(Typography)(({ theme }) => ({\n  fontSize: '6rem',\n  fontWeight: 700,\n  color: theme.palette.primary.main,\n  marginBottom: theme.spacing(2),\n  lineHeight: 1,\n  [theme.breakpoints.down('sm')]: {\n    fontSize: '4rem',\n  },\n}));\n\nexport const ErrorMessage = styled(Typography)(({ theme }) => ({\n  fontSize: '1.2rem',\n  color: theme.palette.text.secondary,\n  marginBottom: theme.spacing(4),\n  maxWidth: '500px',\n}));\n\nexport const HomeButton = styled(Button)(({ theme }) => ({\n  padding: theme.spacing(1.5, 4),\n  fontSize: '1rem',\n}));"
+    },
+    {
+      "path": "src/pages/notFound/index.tsx",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/pages/notFound/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { useNavigate } from 'react-router-dom';\n\nimport { NotFoundContainer, ErrorIcon, ErrorTitle, ErrorMessage, HomeButton } from './styles';\n\nconst NotFound = () => {\n  const navigate = useNavigate();\n\n  return (\n    <NotFoundContainer>\n      <ErrorIcon />\n      \n      <ErrorTitle variant=\"h1\">\n        404\n      </ErrorTitle>\n      \n      <ErrorMessage variant=\"body1\">\n        Sorry, the page you are looking for does not exist.\n      </ErrorMessage>\n      \n      <HomeButton \n        variant=\"contained\"\n        onClick={() => navigate('/')}\n      >\n        Back to Home\n      </HomeButton>\n    </NotFoundContainer>\n  );\n};\n\nexport default NotFound;"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_IMPORT",
+      "content": "import CssBaseline from '@mui/material/CssBaseline';"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_AFTER",
+      "content": "      <CssBaseline />\n",
+      "pattern": "<ToastContainer {...toastContainerConfig} />"
+    },
+    {
+      "path": "src/styles/theme.ts",
+      "action": "CREATE_FILE",
+      "content": "import { createTheme } from '@mui/material/styles';\n\nconst theme = createTheme({\n  palette: {\n    mode: 'dark',\n    primary: {\n      main: '#646cff',\n      light: '#747bff',\n      dark: '#535bf2',\n    },\n    secondary: {\n      main: '#f50057',\n    },\n    background: {\n      default: '#242424',\n      paper: '#1a1a1a',\n    },\n    text: {\n      primary: 'rgba(255, 255, 255, 0.87)',\n      secondary: 'rgba(255, 255, 255, 0.6)',\n    },\n  },\n  typography: {\n    fontFamily: [\n      'Inter',\n      'system-ui',\n      'Avenir',\n      'Helvetica',\n      'Arial',\n      'sans-serif',\n    ].join(','),\n    h1: {\n      fontSize: '3.2em',\n      fontWeight: 700,\n      lineHeight: 1.1,\n    },\n    h6: {\n      fontSize: '1em',\n      fontWeight: 500,\n    },\n  },\n  components: {\n    MuiButton: {\n      styleOverrides: {\n        root: {\n          borderRadius: '8px',\n          fontSize: '1em',\n          fontWeight: 500,\n          padding: '0.6em 1.2em',\n          textTransform: 'none',\n          transition: 'border-color 0.25s',\n          '&:hover': {\n            borderColor: '#646cff',\n          },\n          '&:focus-visible': {\n            outline: '4px auto -webkit-focus-ring-color',\n          },\n        },\n      },\n    },\n  },\n});\n\nexport default theme;"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_AFTER",
+      "content": "import theme from '@styles/theme';",
+      "pattern": "import Router from '@routes/index';"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "<>",
+      "replacement": "<ThemeProvider theme={theme}>"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_AFTER",
+      "content": "</ThemeProvider>",
+      "pattern": " </>"
+    }
+  ]
+}
