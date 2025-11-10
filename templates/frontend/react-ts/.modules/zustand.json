@@ -1,0 +1,49 @@
+{
+  "instructions": [
+    {
+      "path": "src/stores/system/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { create } from \"zustand\";\nimport { persist, createJSONStorage } from \"zustand/middleware\";\nimport { systemStoreDefaultValues } from \"./defaultValues\";\nimport { SystemStore } from \"./types\";\n\nconst useSystemStore = create<SystemStore>()(\n  persist(\n    (set, get) => ({\n      system: systemStoreDefaultValues,\n      setSystem: (system) => set({ system }),\n      updateSystem: (partialSystem) =>\n        set((state) => ({\n          system: { ...state.system, ...partialSystem },\n        })),\n      setLoading: (currentLoading?: boolean) =>\n        set((state) => ({\n          system: { ...state.system, loading: currentLoading ?? !state.system.loading },\n        })),\n      setCount: (count: number) =>\n        set((state) => ({\n          system: { ...state.system, count },\n        })),\n      initializeTheme: () => {\n        const { system } = get();\n        if (!system.checkUserTheme) {\n          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;\n          const theme = isDark ? 'dark' : 'light';\n          set((state) => ({\n            system: { ...state.system, theme, defaultUserTheme: theme, checkUserTheme: true }\n          }));\n        }\n      },\n      reset: () => {\n        set({ system: systemStoreDefaultValues });\n        localStorage.removeItem(\"system-store\");\n      },\n    }),\n    {\n      name: \"system-store\",\n      storage: createJSONStorage(() => localStorage),\n    }\n  )\n);\n\nexport default useSystemStore;"
+    },
+    {
+      "path": "src/stores/system/types.ts",
+      "action": "CREATE_FILE",
+      "content": "export type ThemeMode = \"light\" | \"dark\";\n\nexport interface SystemStoreData {\n  theme: ThemeMode;\n  loading: boolean;\n  checkUserTheme: boolean;\n  defaultUserTheme: ThemeMode | null;\n  count: number;\n}\n\nexport interface SystemStore {\n  system: SystemStoreData;\n  setSystem: (system: SystemStoreData) => void;\n  updateSystem: (partialSystem: Partial<SystemStoreData>) => void;\n  setLoading: (currentLoading?: boolean) => void;\n  setCount: (count: number) => void;\n  initializeTheme: () => void;\n  reset: () => void;\n}"
+    },
+    {
+      "path": "src/stores/system/defaultValues.ts",
+      "action": "CREATE_FILE",
+      "content": "import { SystemStoreData } from \"./types\";\n\nexport const systemStoreDefaultValues: SystemStoreData = {\n  theme: \"dark\",\n  loading: false,\n  checkUserTheme: false,\n  defaultUserTheme: null,\n  count: 0,\n};"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"zustand\": \"^5.0.8\"",
+      "pattern": "  \"dependencies\": {"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "INSERT_IMPORT",
+      "content": "import useSystemStore from '@stores/system';"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "const [count, setCount] = useState(0);",
+      "replacement": "const { system: { count }, setCount } = useSystemStore();"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "setCount((count) => count + 1)",
+      "replacement": "setCount(count + 1)"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "'React', 'TypeScript', 'Vite', 'Zustand'",
+      "pattern": "'React', 'TypeScript', 'Vite'",
+      "replacement": "'React', 'TypeScript', 'Vite', 'Zustand'"
+    }
+  ]
+}

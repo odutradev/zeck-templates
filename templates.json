@@ -34,7 +34,13 @@
           "name": "mui-material-ts",
           "description": "..",
           "path": "./.modules/mui-material.json"
+        },
+        {
+          "name": "zustand-ts",
+          "description": "..",
+          "path": "./.modules/zustand.json"
         }
+
       ]
     }
   ],
