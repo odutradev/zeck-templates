@@ -41,7 +41,7 @@
     {
       "path": "src/pages/main/index.tsx",
       "action": "CREATE_FILE",
-      "content": "import { useState } from 'react';\nimport { Button } from '@mui/material';\n\nimport logo from '@assets/imgs/logo.svg';\n\nimport { MainContainer, Logo, Title, ChipsContainer, StyledChip, ButtonContainer } from './styles';\n\nconst Main = () => {\n  const [count, setCount] = useState(0);\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  return (\n    <MainContainer>\n      <Logo \n        src={logo}\n        alt=\"Zeck Logo\" \n      />\n      \n      <Title variant=\"h1\">\n        Zeck React Typescript Boilerplate + Vite\n      </Title>\n      \n      <ChipsContainer>\n        {modules.map((module) => (\n          <StyledChip \n            key={module} \n            label={module}\n          />\n        ))}\n      </ChipsContainer>\n      \n      <ButtonContainer>\n        <Button \n          variant=\"contained\"\n          onClick={() => setCount((count) => count + 1)}\n        >\n          count is {count}\n        </Button>\n      </ButtonContainer>\n    </MainContainer>\n  );\n};\n\nexport default Main;"
+      "content": "import { useState } from 'react';\nimport { Button } from '@mui/material';\n\nimport logo from '@assets/imgs/logo.svg';\nimport { MainContainer, Logo, Title, ChipsContainer, StyledChip, ButtonContainer } from './styles';\n\nconst Main = () => {\n  const [count, setCount] = useState(0);\n  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');\n  const modules = ['React', 'TypeScript', 'Vite'];\n\n  const toggleTheme = () => {\n    const newTheme = theme === 'light' ? 'dark' : 'light';\n    setTheme(newTheme);\n    localStorage.setItem('theme', newTheme);\n    window.location.reload()\n  };\n\n  return (\n    <MainContainer>\n      <Logo src={logo} alt=\"Zeck Logo\" />\n      <Title variant=\"h1\">Zeck React Typescript Boilerplate + Vite</Title>\n      <ChipsContainer>\n        {modules.map((module) => (\n          <StyledChip key={module} label={module} />\n        ))}\n      </ChipsContainer>\n      <ButtonContainer>\n        <Button variant=\"contained\" onClick={() => setCount((c) => c + 1)}>\n          count is {count}\n        </Button>\n        <Button variant=\"outlined\" onClick={toggleTheme} sx={{ ml: 2 }}>\n          {theme === 'light' ? 'Dark' : 'Light'} Mode\n        </Button>\n      </ButtonContainer>\n    </MainContainer>\n  );\n};\n\nexport default Main;"
     },
     {
       "path": "src/pages/notFound/styles.css",
@@ -75,12 +75,12 @@
     {
       "path": "src/styles/theme.ts",
       "action": "CREATE_FILE",
-      "content": "import { createTheme } from '@mui/material/styles';\n\nconst theme = createTheme({\n  palette: {\n    mode: 'light',\n    primary: {\n      main: '#646cff',\n      light: '#747bff',\n      dark: '#535bf2',\n    },\n    secondary: {\n      main: '#f50057',\n    },\n    background: {\n      default: '#242424',\n      paper: '#1a1a1a',\n    },\n    text: {\n      primary: 'rgba(255, 255, 255, 0.87)',\n      secondary: 'rgba(255, 255, 255, 0.6)',\n    },\n  },\n  typography: {\n    fontFamily: [\n      'Inter',\n      'system-ui',\n      'Avenir',\n      'Helvetica',\n      'Arial',\n      'sans-serif',\n    ].join(','),\n    h1: {\n      fontSize: '3.2em',\n      fontWeight: 700,\n      lineHeight: 1.1,\n    },\n    h6: {\n      fontSize: '1em',\n      fontWeight: 500,\n    },\n  },\n  components: {\n    MuiButton: {\n      styleOverrides: {\n        root: {\n          borderRadius: '8px',\n          fontSize: '1em',\n          fontWeight: 500,\n          padding: '0.6em 1.2em',\n          textTransform: 'none',\n          transition: 'border-color 0.25s',\n          '&:hover': {\n            borderColor: '#646cff',\n          },\n          '&:focus-visible': {\n            outline: '4px auto -webkit-focus-ring-color',\n          },\n        },\n      },\n    },\n  },\n});\n\nexport default theme;"
+      "content": "import { createTheme } from '@mui/material/styles';\n\nexport const lightTheme = createTheme({\n  palette: {\n    mode: 'light',\n    primary: {\n      main: '#646cff',\n      light: '#747bff',\n      dark: '#535bf2',\n    },\n    secondary: {\n      main: '#f50057',\n    },\n    background: {\n      default: '#ffffff',\n      paper: '#ffffff',\n    },\n    text: {\n      primary: 'rgba(0, 0, 0, 0.87)',\n      secondary: 'rgba(0, 0, 0, 0.6)',\n    },\n  },\n  typography: {\n    fontFamily: [\n      'Inter',\n      'system-ui',\n      'Avenir',\n      'Helvetica',\n      'Arial',\n      'sans-serif',\n    ].join(','),\n    h1: {\n      fontSize: '3.2em',\n      fontWeight: 700,\n      lineHeight: 1.1,\n    },\n    h6: {\n      fontSize: '1em',\n      fontWeight: 500,\n    },\n  },\n  components: {\n    MuiButton: {\n      styleOverrides: {\n        root: {\n          borderRadius: '8px',\n          fontSize: '1em',\n          fontWeight: 500,\n          padding: '0.6em 1.2em',\n          textTransform: 'none',\n          transition: 'border-color 0.25s',\n          '&:hover': {\n            borderColor: '#646cff',\n          },\n          '&:focus-visible': {\n            outline: '4px auto -webkit-focus-ring-color',\n          },\n        },\n      },\n    },\n  },\n});\n\nexport const darkTheme = createTheme({\n  palette: {\n    mode: 'dark',\n    primary: {\n      main: '#646cff',\n      light: '#747bff',\n      dark: '#535bf2',\n    },\n    secondary: {\n      main: '#f50057',\n    },\n    background: {\n      default: '#242424',\n      paper: '#1a1a1a',\n    },\n    text: {\n      primary: 'rgba(255, 255, 255, 0.87)',\n      secondary: 'rgba(255, 255, 255, 0.6)',\n    },\n  },\n  typography: {\n    fontFamily: [\n      'Inter',\n      'system-ui',\n      'Avenir',\n      'Helvetica',\n      'Arial',\n      'sans-serif',\n    ].join(','),\n    h1: {\n      fontSize: '3.2em',\n      fontWeight: 700,\n      lineHeight: 1.1,\n    },\n    h6: {\n      fontSize: '1em',\n      fontWeight: 500,\n    },\n  },\n  components: {\n    MuiButton: {\n      styleOverrides: {\n        root: {\n          borderRadius: '8px',\n          fontSize: '1em',\n          fontWeight: 500,\n          padding: '0.6em 1.2em',\n          textTransform: 'none',\n          transition: 'border-color 0.25s',\n          '&:hover': {\n            borderColor: '#646cff',\n          },\n          '&:focus-visible': {\n            outline: '4px auto -webkit-focus-ring-color',\n          },\n        },\n      },\n    },\n  },\n});"
     },
     {
       "path": "src/main.tsx",
       "action": "INSERT_AFTER",
-      "content": "import theme from '@styles/theme';",
+      "content": "import { lightTheme, darkTheme } from '@styles/theme';",
       "pattern": "import Router from '@routes/index';"
     },
     {
@@ -106,6 +106,25 @@
       "action": "INSERT_AFTER",
       "content": "        '@mui/styled-engine': '@mui/styled-engine-sc',",
       "pattern": "      alias: {"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_BEFORE",
+      "content": "const getInitialTheme = () => {\n  if (typeof window !== 'undefined' && window.localStorage) {\n    const savedThemeMode = window.localStorage.getItem('theme');\n    return savedThemeMode === 'dark' ? darkTheme : lightTheme;\n  }\n  return lightTheme;\n};",
+      "pattern": "const App = () => {"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_AFTER",
+      "content": "  const [activeTheme, setActiveTheme] = useState(getInitialTheme());\n\n  useEffect(() => {\n    const handleStorageChange = (event: StorageEvent) => {\n      if (event.key === 'theme') {\n        setActiveTheme(getInitialTheme());\n      }\n    };\n\n    window.addEventListener('storage', handleStorageChange);\n\n    return () => {\n      window.removeEventListener('storage', handleStorageChange);\n    };\n  }, []);",
+      "pattern": "const App = () => {"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "'Vite', 'MUI', 'Styled Components'",
+      "pattern": "'Vite'",
+      "replacement": "'Vite', 'MUI', 'Styled Components'"
     }
   ]
 }
