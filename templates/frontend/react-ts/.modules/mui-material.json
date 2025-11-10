@@ -87,7 +87,7 @@
       "path": "src/main.tsx",
       "action": "REPLACE_CONTENT",
       "pattern": "<>",
-      "replacement": "<ThemeProvider theme={theme}>"
+      "replacement": "<ThemeProvider theme={activeTheme}>"
     },
     {
       "path": "src/main.tsx",
@@ -125,6 +125,12 @@
       "content": "'Vite', 'MUI', 'Styled Components'",
       "pattern": "'Vite'",
       "replacement": "'Vite', 'MUI', 'Styled Components'"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "StrictMode, useEffect",
+      "replacement": "StrictMode, useEffect, useState"
     }
   ]
 }
