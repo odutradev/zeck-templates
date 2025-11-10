@@ -60,6 +60,13 @@
       "path": "src/pages/notFound/index.tsx",
       "action": "CREATE_FILE",
       "content": "import { Container, ContentWrapper, Title, Message, ButtonLink } from './styles';\n\nconst NotFound = () => {\n  return (\n    <Container>\n      <ContentWrapper>\n        <Title>\n          404\n        </Title>\n        <Message>\n          Sorry, the page you are looking for does not exist.\n        </Message>\n        <ButtonLink href=\"/\">\n          Back to Home\n        </ButtonLink>\n      </ContentWrapper>\n    </Container>\n  );\n};\n\nexport default NotFound;"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "'Vite', 'MUI', 'Styled Components'",
+      "pattern": "'Vite'",
+      "replacement": "'Vite', 'Styled Components'"
     }
   ]
 }
