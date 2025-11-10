@@ -29,12 +29,6 @@
     {
       "path": "src/pages/main/index.tsx",
       "action": "REPLACE_CONTENT",
-      "pattern": "const [count, setCount] = useState(0);",
-      "replacement": "const { system: { count }, setCount } = useSystemStore();"
-    },
-    {
-      "path": "src/pages/main/index.tsx",
-      "action": "REPLACE_CONTENT",
       "pattern": "setCount((count) => count + 1)",
       "replacement": "setCount(count + 1)"
     },
@@ -44,6 +38,19 @@
       "content": "'React', 'TypeScript', 'Vite', 'Zustand'",
       "pattern": "'React', 'TypeScript', 'Vite'",
       "replacement": "'React', 'TypeScript', 'Vite', 'Zustand'"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "useSystemStore()",
+      "pattern": "useState(0)"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "{ system: { count }, setCount }",
+      "pattern": "[count, setCount]",
+      "replacement": "{ system: { count }, setCount }"
     }
   ]
 }
