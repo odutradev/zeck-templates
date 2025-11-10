@@ -95,6 +95,11 @@
       "content": "</ThemeProvider>",
       "pattern": " </>",
       "replacement": "</ ThemeProvider>"
+    },
+    {
+      "path": "src/main.tsx",
+      "action": "INSERT_IMPORT",
+      "content": "import { ThemeProvider } from '@mui/material';"
     }
   ]
 }
