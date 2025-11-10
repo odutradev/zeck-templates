@@ -93,7 +93,8 @@
       "path": "src/main.tsx",
       "action": "REPLACE_CONTENT",
       "content": "</ThemeProvider>",
-      "pattern": " </>"
+      "pattern": " </>",
+      "replacement": "</ ThemeProvider>"
     }
   ]
 }
