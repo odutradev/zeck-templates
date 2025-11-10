@@ -91,7 +91,7 @@
     },
     {
       "path": "src/main.tsx",
-      "action": "INSERT_AFTER",
+      "action": "REPLACE_CONTENT",
       "content": "</ThemeProvider>",
       "pattern": " </>"
     }
