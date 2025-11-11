@@ -25,28 +25,28 @@
       "url": "templates/frontend/react-ts",
       "description": "A React.js boilerplate with TypeScript, Vite, and ESLint.",
       "modules": [
-        {
-          "name": "styled-components",
-          "description": "CSS-in-JS styling library",
-          "path": "./.modules/styled-components.json"
-        },
-        {
-          "name": "mui-material",
-          "description": "..",
-          "path": "./.modules/mui-material.json"
-        },
-        {
-          "name": "zustand",
-          "description": "..",
-          "path": "./.modules/zustand.json"
-        },
-        {
-          "name": "docker",
-          "description": "..",
-          "path": "./.modules/docker.json"
-        }
-
-      ]
+          {
+            "name": "styled-components",
+            "description": "CSS-in-JS styling library",
+            "path": "./.modules/styled-components.json"
+          },
+          {
+            "name": "mui-material",
+            "description": "Material-UI component library",
+            "path": "./.modules/mui-material.json",
+            "excludes": ["styled-components"]
+          },
+          {
+            "name": "zustand",
+            "description": "State management library",
+            "path": "./.modules/zustand.json"
+          },
+          {
+            "name": "docker",
+            "description": "Containerization support",
+            "path": "./.modules/docker.json"
+          }
+        ]
     }
   ],
   "backend": [
