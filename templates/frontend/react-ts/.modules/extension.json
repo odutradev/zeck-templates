@@ -151,6 +151,15 @@
       "path": "src/background/worker.ts",
       "action": "CREATE_FILE",
       "content": "import createApi from \"@utils/functions/api\";\nimport { broadcastToTabs } from \"@utils/functions/messager\";\nimport { Messager, SendRequestMessager } from \"@utils/types/messager\";\nimport axios, { AxiosRequestConfig } from \"axios\";\n\nchrome.runtime.onInstalled.addListener(() => {\n    console.log(\"[background] Extension installed\");\n});\n\nchrome.runtime.onMessage.addListener((message: Messager | SendRequestMessager, _sender, sendResponse) => {\n    (async () => {\n      try {\n        switch (message.type) {\n          case \"change_features\":\n            await broadcastToTabs(message);\n            sendResponse({ success: true });\n            break;\n          case \"send_api_action\":\n            try {\n                const response = await (await createApi())((message as SendRequestMessager).config as AxiosRequestConfig);\n                sendResponse(response.data);\n            } catch (error){\n                if (axios.isAxiosError(error) && error.response) {\n                    return sendResponse({ error: error.response.data.message || 'Unknown error' });\n                };\n                sendResponse({ success: false, error });\n            };\n            break;\n          default:\n            sendResponse({ error: \"Unknown message type\" });\n            break;\n        }\n      } catch (error) {\n        console.error('[background onMessage]', error);\n        sendResponse({ success: false, error });\n      }\n    })();\n  \n    return true;\n  });\n  "
+    },
+    {
+      "path": "src/actions/base/index.ts",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/actions/base/index.ts",
+      "action": "CREATE_FILE",
+      "content": "import { manageActionError } from '@utils/functions/action';\nimport createApi from '@utils/functions/api';\n\nimport type { SomeResourceType, CreateData, UpdateData } from './types';\nimport type { TypeOrError } from '@utils/types/action';\n\nexport const createSomeResource = async (data: CreateData): TypeOrError<SomeResourceType> => {\n  try {\n    const response = await (await createApi()).post(\"/resource\", data);\n    return response.data;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};\n\nexport const getSomeResource = async (id: string): TypeOrError<SomeResourceType> => {\n  try {\n    const response = await (await createApi()).get(`/resource/${id}`);\n    return response.data;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};\n\nexport const updateSomeResource = async (id: string, data: UpdateData): TypeOrError<SomeResourceType> => {\n  try {\n    const response = await (await createApi()).patch(`/resource/${id}`, data);\n    return response.data;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};\n\nexport const deleteSomeResource = async (id: string): TypeOrError<void> => {\n  try {\n    await (await createApi()).delete(`/resource/${id}`);\n    return;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};"
     }
   ]
 }
