@@ -9,6 +9,12 @@
       "path": "nginx.conf",
       "action": "CREATE_FILE",
       "content": "server {\n    listen 80;\n    server_name localhost;\n\n    root /usr/share/nginx/html;\n    index index.html;\n\n    location / {\n        try_files $uri /index.html;\n    }\n\n    error_page 404 /index.html;\n}"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "'React', 'TypeScript', 'Vite'",
+      "replacement": "'React', 'TypeScript', 'Vite', 'Docker'"
     }
   ]
 }
