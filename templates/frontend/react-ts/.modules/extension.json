@@ -160,6 +160,21 @@
       "path": "src/actions/base/index.ts",
       "action": "CREATE_FILE",
       "content": "import { manageActionError } from '@utils/functions/action';\nimport createApi from '@utils/functions/api';\n\nimport type { SomeResourceType, CreateData, UpdateData } from './types';\nimport type { TypeOrError } from '@utils/types/action';\n\nexport const createSomeResource = async (data: CreateData): TypeOrError<SomeResourceType> => {\n  try {\n    const response = await (await createApi()).post(\"/resource\", data);\n    return response.data;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};\n\nexport const getSomeResource = async (id: string): TypeOrError<SomeResourceType> => {\n  try {\n    const response = await (await createApi()).get(`/resource/${id}`);\n    return response.data;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};\n\nexport const updateSomeResource = async (id: string, data: UpdateData): TypeOrError<SomeResourceType> => {\n  try {\n    const response = await (await createApi()).patch(`/resource/${id}`, data);\n    return response.data;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};\n\nexport const deleteSomeResource = async (id: string): TypeOrError<void> => {\n  try {\n    await (await createApi()).delete(`/resource/${id}`);\n    return;\n  } catch (error) {\n    return manageActionError(error);\n  }\n};"
+    },
+    {
+      "path": "src/utils/functions/headers.ts",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/utils/functions/headers.ts",
+      "action": "CREATE_FILE",
+      "content": "import createApi from \"./api\";\n\nexport const setAuthToken = async (token?: string) => {\n  if (token) {\n    localStorage.setItem('token', token);\n    (await createApi()).defaults.headers.common['authorization'] = token;\n  } else {\n    localStorage.removeItem('token');\n    delete (await createApi()).defaults.headers.common['authorization'];\n  }\n};"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "import { useState } from 'react';",
+      "replacement": " "
     }
   ]
 }
