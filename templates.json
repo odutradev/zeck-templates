@@ -45,6 +45,12 @@
             "name": "docker",
             "description": "Containerization support",
             "path": "./.modules/docker.json"
+          },
+          {
+            "name": "extension",
+            "description": "",
+            "excludes": ["zustand"],
+            "path": "./.modules/extension.json"
           }
         ]
     }

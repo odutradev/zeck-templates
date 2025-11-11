@@ -1,0 +1,155 @@
+{
+  "instructions": [
+    {
+      "path": "src/stores/system/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { create } from \"zustand\";\nimport { persist, createJSONStorage } from \"zustand/middleware\";\nimport { systemStoreDefaultValues } from \"./defaultValues\";\nimport { SystemStore } from \"./types\";\n\nconst useSystemStore = create<SystemStore>()(\n  persist(\n    (set, get) => ({\n      system: systemStoreDefaultValues,\n      setSystem: (system) => set({ system }),\n      updateSystem: (partialSystem) =>\n        set((state) => ({\n          system: { ...state.system, ...partialSystem },\n        })),\n      setLoading: (currentLoading?: boolean) =>\n        set((state) => ({\n          system: { ...state.system, loading: currentLoading ?? !state.system.loading },\n        })),\n      setCount: (count: number) =>\n        set((state) => ({\n          system: { ...state.system, count },\n        })),\n      initializeTheme: () => {\n        const { system } = get();\n        if (!system.checkUserTheme) {\n          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;\n          const theme = isDark ? 'dark' : 'light';\n          set((state) => ({\n            system: { ...state.system, theme, defaultUserTheme: theme, checkUserTheme: true }\n          }));\n        }\n      },\n      reset: () => {\n        set({ system: systemStoreDefaultValues });\n        localStorage.removeItem(\"system-store\");\n      },\n    }),\n    {\n      name: \"system-store\",\n      storage: createJSONStorage(() => localStorage),\n    }\n  )\n);\n\nexport default useSystemStore;"
+    },
+    {
+      "path": "src/stores/system/types.ts",
+      "action": "CREATE_FILE",
+      "content": "export type ThemeMode = \"light\" | \"dark\";\n\nexport interface SystemStoreData {\n  theme: ThemeMode;\n  loading: boolean;\n  checkUserTheme: boolean;\n  defaultUserTheme: ThemeMode | null;\n  count: number;\n}\n\nexport interface SystemStore {\n  system: SystemStoreData;\n  setSystem: (system: SystemStoreData) => void;\n  updateSystem: (partialSystem: Partial<SystemStoreData>) => void;\n  setLoading: (currentLoading?: boolean) => void;\n  setCount: (count: number) => void;\n  initializeTheme: () => void;\n  reset: () => void;\n}"
+    },
+    {
+      "path": "src/stores/system/defaultValues.ts",
+      "action": "CREATE_FILE",
+      "content": "import { SystemStoreData } from \"./types\";\n\nexport const systemStoreDefaultValues: SystemStoreData = {\n  theme: \"dark\",\n  loading: false,\n  checkUserTheme: false,\n  defaultUserTheme: null,\n  count: 0,\n};"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"zustand\": \"^5.0.8\",",
+      "pattern": "  \"dependencies\": {"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "INSERT_IMPORT",
+      "content": "import useSystemStore from '@stores/system';"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "'React', 'TypeScript', 'Vite', 'Zustand'",
+      "pattern": "'React', 'TypeScript', 'Vite'",
+      "replacement": "'React', 'TypeScript', 'Vite', 'Zustand'"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "const { system: { count }, setCount } = useSystemStore();",
+      "pattern": "const [count, setCount] = useState(0);",
+      "replacement": "const { system: { count }, setCount } = useSystemStore();"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "content": "count + 1",
+      "pattern": "(count) => count + 1",
+      "replacement": "count + 1"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"@types/chrome\": \"^0.1.27\",",
+      "pattern": "  \"devDependencies\": {"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"@crxjs/vite-plugin\": \"^2.0.0-beta.21\",",
+      "pattern": "\"devDependencies\": {"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"publish\": \"npx pub --bump-package --bump-manifest --build-zip --build --clean --push\"",
+      "pattern": "    \"publish\": \"npx pub --bump-package --build --push\""
+    },
+    {
+      "path": "package.json",
+      "action": "REPLACE_CONTENT",
+      "pattern": "    \"dev\": \"vite\",",
+      "replacement": "    \"dev\": \"tsc -b && vite build --watch\","
+    },
+    {
+      "path": "vite.config.ts",
+      "action": "INSERT_IMPORT",
+      "content": "import { crx } from '@crxjs/vite-plugin';"
+    },
+    {
+      "path": "vite.config.ts",
+      "action": "INSERT_IMPORT",
+      "content": "import manifest from './manifest.json';"
+    },
+    {
+      "path": "vite.config.ts",
+      "action": "INSERT_AFTER",
+      "content": "    crx({ manifest }),",
+      "pattern": "      react(),"
+    },
+    {
+      "path": "manifest.json",
+      "action": "CREATE_FILE",
+      "content": "{\n  \"manifest_version\": 3,\n  \"name\": \"zeck-react-ts-boilerplate\",\n  \"description\": \"\",\n  \"version\": \"0.0.0\",\n  \"action\": {\n    \"default_icon\": {\n      \"32\": \"logo.png\"\n    },\n    \"default_title\": \"UAILab\",\n    \"default_popup\": \"index.html\"\n  },\n  \"icons\": {\n    \"128\": \"logo.png\"\n  },\n  \"permissions\": [\n    \"storage\",\n    \"activeTab\"\n  ],\n  \"background\": {\n    \"service_worker\": \"src/background/worker.ts\"\n  },\n  \"host_permissions\": [\n    \"https://example.com/*\"\n  ],\n  \"content_scripts\": [\n    {\n      \"matches\": [\n        \"https://example.com/*\"\n      ],\n      \"name\": \"example\",\n      \"js\": [\n        \"src/scripts/developing/example/index.tsx\"\n      ],\n      \"type\": \"module\"\n    }\n  ]\n}"
+    },
+    {
+      "path": "src/utils/types/messager.ts",
+      "action": "CREATE_FILE",
+      "content": "export type MessagerType =\n| \"change_features\"\n| \"send_api_action\"\n\nexport interface Messager {\n    type: MessagerType;\n    payload?: any;\n};\n\nexport interface SendRequestMessager {\n    type: MessagerType;\n    config: any;\n};"
+    },
+    {
+      "path": "src/utils/functions/storage.ts",
+      "action": "CREATE_FILE",
+      "content": "const storage = {\n    get: async <T>(key: string): Promise<T | null> => {\n        try {\n            const result = await chrome.storage.local.get([key]);\n            return result[key] || null;\n        } catch (error) {\n            console.error('[storage get]', error);\n            return null;\n        }\n    },\n    \n    set: async <T>(key: string, value: T): Promise<void> => {\n        try {\n            await chrome.storage.local.set({ [key]: value });\n        } catch (error) {\n            console.error('[storage set]', error);\n        }\n    },\n    \n    remove: async (key: string): Promise<void> => {\n        try {\n            await chrome.storage.local.remove(key);\n        } catch (error) {\n            console.error('[storage remove]', error);\n        }\n    }\n};\n\nexport default storage;"
+    },
+    {
+      "path": "src/utils/functions/messager.ts",
+      "action": "CREATE_FILE",
+      "content": "import type { Messager, SendRequestMessager } from \"@utils/types/messager\";\n\nexport const sendMessage = async (message: Messager): Promise<any> => {\n  try {\n    const response = await chrome.runtime.sendMessage(message);\n    return response;\n  } catch (error) {\n    console.error('[sendMessage]', error);\n  }\n};\n\nexport const sendRequestMessage = async (message: SendRequestMessager): Promise<any> => {\n  try {\n    const response = await chrome.runtime.sendMessage(message);\n    return response;\n  } catch (error) {\n    console.error('[sendRequestMessage]', error);\n  }\n};\n\nexport const broadcastToTabs = async (message: Messager): Promise<void> => {\n  try {\n    const tabs = await chrome.tabs.query({});\n    await Promise.allSettled(\n      tabs.map(tab => \n        tab.id ? chrome.tabs.sendMessage(tab.id, message) : Promise.resolve()\n      )\n    );\n  } catch (error) {\n    console.error('[broadcastToTabs]', error);\n  }\n};"
+    },
+    {
+      "path": "src/utils/functions/manageScript.ts",
+      "action": "CREATE_FILE",
+      "content": "import defaultConfig from \"@assets/config/default\";\nimport useExtensionStore from \"@stores/extension\";\nimport { Messager } from \"@utils/types/messager\";\n\nexport type ContentScriptNames = typeof contentScriptNamesData[number];\n\ninterface ManageScriptData {\n    name: ContentScriptNames;\n    run: () => Promise<boolean>;\n};\n\nexport const contentScriptNamesData = [\n  \"example\",\n] as const;\n\nconst manageScript = async ({ name, run }: ManageScriptData) => {\n    useExtensionStore.subscribe(async (state) => {\n        if (state.extension.features[name] === true) {\n            try {\n                console.info(`[manageScript] mode: ${defaultConfig.mode} version: ${defaultConfig.version}\\n\\n\\n\\n`);\n                    let startedIn = Date.now();\n                    console.log(`[manageScript] (${name}) Starting script execution`);\n\n                    console.group(`[${name} logs]`)\n                    const status = await run();\n                    console.groupEnd();\n\n                    let endIn = Date.now();\n                    console.log(`[manageScript] (${name}) Finished in ${(endIn - startedIn) / 1000}s`);\n                    console.log(`[manageScript] (${name}) status: ${status ? \"successful\" : \"unsuccessful\"}`);\n            } catch (error){\n                console.log(`[manageScript] (${name}) Execution error`, error);\n            };\n        };\n    });\n\n    chrome.runtime.onMessage.addListener((message: Messager, _sender, sendResponse) => {\n        if (message.payload.name === name){\n            if (message.type === \"change_features\"){\n              window.location.reload()\n              sendResponse({ success: true })\n              return true;\n            }\n        };\n        return false;\n      });\n};\n\nexport default manageScript;"
+    },
+    {
+      "path": "src/utils/functions/dom.ts",
+      "action": "CREATE_FILE",
+      "content": "import { createRoot } from \"react-dom/client\";\n\ninterface DomServiceOptions {\n  dynamicId?: boolean;\n}\n\nconst domService = {\n  injectReactRoot: async (children: React.ReactNode, options?: DomServiceOptions) => {\n    let reactContainerId = \"uailab-react-root\";\n    if (options?.dynamicId) {\n      const buffer = new Uint8Array(3);\n      crypto.getRandomValues(buffer);\n      const token = Array.from(buffer, byte => byte.toString(16).padStart(2, '0')).join('');\n      reactContainerId += `-${token}`;\n    }\n    let reactContainer = document.getElementById(reactContainerId);\n    if (!reactContainer) {\n      reactContainer = document.createElement(\"div\");\n      reactContainer.id = reactContainerId;\n      document.body.appendChild(reactContainer);\n    }\n    const root = createRoot(reactContainer);\n    root.render(children);\n  }\n};\n\nexport default domService;"
+    },
+    {
+      "path": "src/utils/functions/api.ts",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/utils/functions/api.ts",
+      "action": "CREATE_FILE",
+      "content": "import axios from 'axios';\nimport defaultConfig from '@assets/config/default';\nimport storage from './storage.ts';\n\nconst createApi = async () => {\n  const token = (await storage.get(\"token\")) || \"\";\n\n  return axios.create({\n    baseURL: defaultConfig.baseURL,\n    headers: {\n      'controlAccess': import.meta.env.VITE_CONTROL_ACCESS,\n      'Content-Type': 'application/json',\n      'authorization': token as string,\n    }\n  });\n};\n\nexport default createApi;"
+    },
+    {
+      "path": "src/stores/extension/defaultValues.ts",
+      "action": "CREATE_FILE",
+      "content": "import manifest from \"../../../manifest.json\";\nimport { ExtensionData } from \"./types\";\n\ninterface Features {\n  [key: string]: boolean;\n}\n\nconst features: Features = manifest.content_scripts.reduce((acc, x) => {\n  acc[x.name] = false;\n  return acc;\n}, {} as Features);\n\nconst extensionStoreInitialData: ExtensionData = {\n  features\n};\n\nexport default extensionStoreInitialData;"
+    },
+    {
+      "path": "src/stores/extension/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { persist } from \"zustand/middleware\";\nimport { create } from \"zustand\";\n\nimport { sendMessage } from \"@utils/functions/messager\";\nimport storage from \"@utils/functions/storage\";\nimport defaultValues from \"./defaultValues\";\nimport { ExtensionStore } from \"./types\";\n\nconst useExtensionStore = create<ExtensionStore>()(\n  persist(\n    (set) => ({\n      setExtension: (extension) => set({ extension }),\n      extension: defaultValues,\n      setFeatureStatus: async (featureName, status) => {\n        set((state) => {\n          const updatedExtension = { ...state.extension };\n          updatedExtension.features[featureName] = status;\n          return { extension: updatedExtension };\n        });\n\n        await sendMessage({ type: \"change_features\", payload: {\n          name: featureName\n        } });\n      },\n      updateExtension: (partialExtension) => set((state) => ({\n        extension: { ...state.extension, ...partialExtension },\n      })),\n    }),\n    {\n      name: \"extension-store\",\n      storage: {\n        getItem: async (key: string) => {\n          const result = await storage.get<string>(key);\n          return result ? (JSON.parse(result) as { state: ExtensionStore }) : null;\n        },\n        setItem: async (key: string, value: { state: ExtensionStore }) => {\n          await storage.set(key, JSON.stringify(value));\n        },\n        removeItem: async (key: string) => {\n          await storage.remove(key);\n        },\n      },\n    }\n  )\n);\n\nexport default useExtensionStore;"
+    },
+    {
+      "path": "src/stores/extension/types.ts",
+      "action": "CREATE_FILE",
+      "content": "export interface ExtensionData {\n    features: Record<string, boolean>;\n};\n\nexport interface ExtensionStore {\n  extension: ExtensionData;\n  setExtension: (extension: ExtensionData) => void;\n  setFeatureStatus: (featureName: string, status: boolean) => void;\n  updateExtension: (partialExtension: Partial<ExtensionData>) => void;\n};"
+    },
+    {
+      "path": "src/scripts/developing/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import manageScript from \"@utils/functions/manageScript\";\nimport domService from \"@utils/functions/dom\"\nimport Main from \"@pages/main\";\n\nmanageScript({\n    name: \"example\",\n    run: async () => {\n        const p = document.querySelector(\"p\");\n\n        if (p) {\n            p.textContent = \"This text was modified via extension.\";\n        }\n        domService.injectReactRoot(<Main/>);\n\n        return true;\n    }\n})"
+    },
+    {
+      "path": "src/background/worker.ts",
+      "action": "CREATE_FILE",
+      "content": "import createApi from \"@utils/functions/api\";\nimport { broadcastToTabs } from \"@utils/functions/messager\";\nimport { Messager, SendRequestMessager } from \"@utils/types/messager\";\nimport axios, { AxiosRequestConfig } from \"axios\";\n\nchrome.runtime.onInstalled.addListener(() => {\n    console.log(\"[background] Extension installed\");\n});\n\nchrome.runtime.onMessage.addListener((message: Messager | SendRequestMessager, _sender, sendResponse) => {\n    (async () => {\n      try {\n        switch (message.type) {\n          case \"change_features\":\n            await broadcastToTabs(message);\n            sendResponse({ success: true });\n            break;\n          case \"send_api_action\":\n            try {\n                const response = await (await createApi())((message as SendRequestMessager).config as AxiosRequestConfig);\n                sendResponse(response.data);\n            } catch (error){\n                if (axios.isAxiosError(error) && error.response) {\n                    return sendResponse({ error: error.response.data.message || 'Unknown error' });\n                };\n                sendResponse({ success: false, error });\n            };\n            break;\n          default:\n            sendResponse({ error: \"Unknown message type\" });\n            break;\n        }\n      } catch (error) {\n        console.error('[background onMessage]', error);\n        sendResponse({ success: false, error });\n      }\n    })();\n  \n    return true;\n  });\n  "
+    }
+  ]
+}
