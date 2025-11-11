@@ -1,0 +1,14 @@
+{
+  "instructions": [
+    {
+      "path": "Dockerfile",
+      "action": "CREATE_FILE",
+      "content": "FROM node:18 AS builder\nWORKDIR /app\nCOPY package.json  ./\nRUN npm install --force\nCOPY . ./\nRUN npm run build\n\nFROM nginx:stable-alpine\nCOPY --from=builder /app/dist /usr/share/nginx/html\nCOPY nginx.conf /etc/nginx/conf.d/default.conf\nEXPOSE 80\nCMD [\"nginx\", \"-g\", \"daemon off;\"]"
+    },
+    {
+      "path": "nginx.conf",
+      "action": "CREATE_FILE",
+      "content": "server {\n    listen 80;\n    server_name localhost;\n\n    root /usr/share/nginx/html;\n    index index.html;\n\n    location / {\n        try_files $uri /index.html;\n    }\n\n    error_page 404 /index.html;\n}"
+    }
+  ]
+}

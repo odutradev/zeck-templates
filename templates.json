@@ -26,19 +26,24 @@
       "description": "A React.js boilerplate with TypeScript, Vite, and ESLint.",
       "modules": [
         {
-          "name": "styled-components-ts",
+          "name": "styled-components",
           "description": "CSS-in-JS styling library",
           "path": "./.modules/styled-components.json"
         },
         {
-          "name": "mui-material-ts",
+          "name": "mui-material",
           "description": "..",
           "path": "./.modules/mui-material.json"
         },
         {
-          "name": "zustand-ts",
+          "name": "zustand",
           "description": "..",
           "path": "./.modules/zustand.json"
+        },
+        {
+          "name": "docker",
+          "description": "..",
+          "path": "./.modules/docker.json"
         }
 
       ]
