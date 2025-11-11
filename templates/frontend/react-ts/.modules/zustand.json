@@ -46,12 +46,6 @@
       "content": "count + 1",
       "pattern": "(count) => count + 1",
       "replacement": "count + 1"
-    },
-    {
-      "path": "src/pages/main/index.tsx",
-      "action": "REPLACE_CONTENT",
-      "pattern": "'React', 'TypeScript', 'Vite'",
-      "replacement": "'React', 'TypeScript', 'Vite', 'Docker'"
     }
   ]
 }
