@@ -61,9 +61,10 @@
     },
     {
       "path": "package.json",
-      "action": "INSERT_AFTER",
+      "action": "REPLACE_CONTENT",
       "content": "    \"publish\": \"npx pub --bump-package --bump-manifest --build-zip --build --clean --push\"",
-      "pattern": "    \"publish\": \"npx pub --bump-package --build --push\""
+      "pattern": "    \"publish\": \"npx pub --bump-package --build --push\"",
+      "replacement": "    \"publish\": \"npx pub --bump-package --bump-manifest --build-zip --build --clean --push\""
     },
     {
       "path": "package.json",
