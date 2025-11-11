@@ -32,6 +32,7 @@ package-lock.json
 zeck-templates-merged.txt
 merged-output.txt 
 
+templates/testes/
 # react-js ignore
 templates/react-js/node_modules
 templates/react-js/build
