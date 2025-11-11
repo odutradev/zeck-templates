@@ -18,7 +18,7 @@
     {
       "path": "package.json",
       "action": "INSERT_AFTER",
-      "content": "    \"zustand\": \"^5.0.8\"",
+      "content": "    \"zustand\": \"^5.0.8\",",
       "pattern": "  \"dependencies\": {"
     },
     {
