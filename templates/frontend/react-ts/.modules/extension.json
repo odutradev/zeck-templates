@@ -91,7 +91,7 @@
     {
       "path": "manifest.json",
       "action": "CREATE_FILE",
-      "content": "{\n  \"manifest_version\": 3,\n  \"name\": \"zeck-react-ts-boilerplate\",\n  \"description\": \"\",\n  \"version\": \"0.0.0\",\n  \"action\": {\n    \"default_icon\": {\n      \"32\": \"logo.png\"\n    },\n    \"default_title\": \"UAILab\",\n    \"default_popup\": \"index.html\"\n  },\n  \"icons\": {\n    \"128\": \"logo.png\"\n  },\n  \"permissions\": [\n    \"storage\",\n    \"activeTab\"\n  ],\n  \"background\": {\n    \"service_worker\": \"src/background/worker.ts\"\n  },\n  \"host_permissions\": [\n    \"https://example.com/*\"\n  ],\n  \"content_scripts\": [\n    {\n      \"matches\": [\n        \"https://example.com/*\"\n      ],\n      \"name\": \"example\",\n      \"js\": [\n        \"src/scripts/developing/example/index.tsx\"\n      ],\n      \"type\": \"module\"\n    }\n  ]\n}"
+      "content": "{\n  \"manifest_version\": 3,\n  \"name\": \"zeck-react-ts-boilerplate\",\n  \"description\": \"\",\n  \"version\": \"0.0.0\",\n  \"action\": {\n    \"default_title\": \"UAILab\",\n    \"default_popup\": \"index.html\"\n  },\n  \"permissions\": [\n    \"storage\",\n    \"activeTab\"\n  ],\n  \"background\": {\n    \"service_worker\": \"src/background/worker.ts\"\n  },\n  \"host_permissions\": [\n    \"https://example.com/*\"\n  ],\n  \"content_scripts\": [\n    {\n      \"matches\": [\n        \"https://example.com/*\"\n      ],\n      \"name\": \"example\",\n      \"js\": [\n        \"src/scripts/developing/example/index.tsx\"\n      ],\n      \"type\": \"module\"\n    }\n  ]\n}"
     },
     {
       "path": "src/utils/types/messager.ts",
@@ -143,7 +143,7 @@
       "content": "export interface ExtensionData {\n    features: Record<string, boolean>;\n};\n\nexport interface ExtensionStore {\n  extension: ExtensionData;\n  setExtension: (extension: ExtensionData) => void;\n  setFeatureStatus: (featureName: string, status: boolean) => void;\n  updateExtension: (partialExtension: Partial<ExtensionData>) => void;\n};"
     },
     {
-      "path": "src/scripts/developing/index.tsx",
+      "path": "src/scripts/developing/example/index.tsx",
       "action": "CREATE_FILE",
       "content": "import manageScript from \"@utils/functions/manageScript\";\nimport domService from \"@utils/functions/dom\"\nimport Main from \"@pages/main\";\n\nmanageScript({\n    name: \"example\",\n    run: async () => {\n        const p = document.querySelector(\"p\");\n\n        if (p) {\n            p.textContent = \"This text was modified via extension.\";\n        }\n        domService.injectReactRoot(<Main/>);\n\n        return true;\n    }\n})"
     },
