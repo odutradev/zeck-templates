@@ -175,6 +175,38 @@
       "action": "REPLACE_CONTENT",
       "pattern": "import { useState } from 'react';",
       "replacement": " "
+    },
+    {
+      "path": "src/routes/components/initialRoute.tsx",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/routes/components/reloadHandler.tsx",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/routes/index.tsx",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/routes/index.tsx",
+      "action": "CREATE_FILE",
+      "content": "import { useEffect, useState } from \"react\";\n\nimport storage from \"@utils/functions/storage\";\nimport NotFound from \"@pages/notFound\";\nimport routes from \"@routes/routes\";\n\nconst Router = () => {\n  const [token, setToken] = useState<string | null>(null);\n\n  const route = routes.find((r) => window.location.pathname.includes(r.path));\n  if (!route) return <NotFound/>\n\n  useEffect(() => {\n    (async ()=> {\n        const storedToken = await storage.get(\"token\");\n        setToken(typeof storedToken === \"string\" ? storedToken : null);\n    })();\n  }, []);\n\n  switch (route?.type){\n    case'auth':\n      return token ? route.component : <></>;\n    case'admin':\n      return token ? route.component : <></>;\n    default: \n      return route?.component\n  }\n};\n\nexport default Router;"
+    },
+    {
+      "path": "src/routes/routes.tsx",
+      "action": "DELETE_FILE"
+    },
+    {
+      "path": "src/routes/routes.tsx",
+      "action": "CREATE_FILE",
+      "content": "import Main from \"@pages/main\";\n\ninterface Route {\n    type?: 'auth' | 'admin' | null;\n    component: any;\n    path: string;\n};\n\nconst routes: Route[] = [\n    {\n        path: \"index.html\",\n        component: <Main/>,\n        type: null\n    }\n];\n\nexport default routes;"
+    },
+    {
+      "path": "src/pages/main/styles.css",
+      "action": "INSERT_AFTER",
+      "content": "        body {\n            min-height: 450px;\n            min-width: 400px;\n        };",
+      "pattern": "body{\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n"
     }
   ]
 }
