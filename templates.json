@@ -28,29 +28,34 @@
           {
             "name": "styled-components",
             "description": "CSS-in-JS styling library",
-            "path": "./.modules/styled-components.json"
+            "path": "./.modules/styled-components.json",
+            "priority": 5
           },
           {
             "name": "mui-material",
             "description": "Material-UI component library",
             "path": "./.modules/mui-material.json",
-            "excludes": ["styled-components"]
+            "excludes": ["styled-components"],
+            "priority": 4
           },
           {
             "name": "zustand",
             "description": "State management library",
-            "path": "./.modules/zustand.json"
+            "path": "./.modules/zustand.json",
+            "priority": 2
           },
           {
             "name": "docker",
             "description": "Containerization support",
-            "path": "./.modules/docker.json"
+            "path": "./.modules/docker.json",
+            "priority": 1
           },
           {
             "name": "extension",
             "description": "",
             "excludes": ["zustand"],
-            "path": "./.modules/extension.json"
+            "path": "./.modules/extension.json",
+            "priority": 1
           }
         ]
     }
