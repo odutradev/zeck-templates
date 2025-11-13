@@ -198,6 +198,25 @@
       "content": "index: path.resolve(__dirname, 'index.html')",
       "pattern": "index: path.resolve(__dirname, 'index.html')",
       "replacement": "index: path.resolve(__dirname, 'index.html'),\\n\\noptions: path.resolve(__dirname, 'index.html')"
+    },
+    {
+      "path": "src/styles/globalStyles.ts",
+      "action": "INSERT_AFTER",
+      "content": "        body {\n            min-height: 450px;\n            min-width: 400px;\n        };",
+      "pattern": "  *, *::before, *::after {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n  }",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_EXISTS",
+            "value": "styled-components"
+          },
+          {
+            "type": "FILE_EXISTS",
+            "value": "src/styles/globalStyles.ts"
+          }
+        ],
+        "logic": "AND"
+      }
     }
   ]
 }
