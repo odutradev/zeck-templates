@@ -1,22 +1,6 @@
 {
   "instructions": [
     {
-      "path": "src/styles/globalStyles.ts",
-      "action": "CREATE_FILE",
-      "content": "import { createGlobalStyle } from \"styled-components\";\n\nconst GlobalStyles = createGlobalStyle`\n  *, *::before, *::after {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n  }\n`;\n\nexport default GlobalStyles;"
-    },
-    {
-      "path": "src/main.tsx",
-      "action": "INSERT_IMPORT",
-      "content": "import GlobalStyles from '@styles/globalStyles';"
-    },
-    {
-      "path": "src/main.tsx",
-      "action": "INSERT_AFTER",
-      "content": "      <GlobalStyles />\n",
-      "pattern": "<Router />"
-    },
-    {
       "path": "src/pages/main/styles.ts",
       "action": "CREATE_FILE",
       "content": "import { Box, Typography, Chip } from '@mui/material';\nimport { styled } from '@mui/material/styles';\n\nexport const MainContainer = styled(Box)(({ theme }) => ({\n  display: 'flex',\n  flexDirection: 'column',\n  alignItems: 'center',\n  justifyContent: 'center',\n  minHeight: '100vh',\n  padding: theme.spacing(4),\n}));\n\nexport const Logo = styled('img')({\n  height: '12em',\n  willChange: 'filter',\n  transition: 'filter 300ms',\n  '&:hover': {\n    filter: 'drop-shadow(0 0 2em #646cffaa)',\n  },\n});\n\nexport const Title = styled(Typography)(({ theme }) => ({\n  fontSize: '3.2em',\n  lineHeight: 1.1,\n  textAlign: 'center',\n  marginBottom: theme.spacing(3),\n  [theme.breakpoints.down('sm')]: {\n    fontSize: '2em',\n  },\n}));\n\nexport const ChipsContainer = styled(Box)(({ theme }) => ({\n  display: 'flex',\n  gap: theme.spacing(1),\n  flexWrap: 'wrap',\n  justifyContent: 'center',\n  marginBottom: theme.spacing(4),\n}));\n\nexport const StyledChip = styled(Chip)(({ theme }) => ({\n  fontSize: '0.9em',\n  fontWeight: 500,\n  padding: theme.spacing(0.5, 1),\n  backgroundColor: theme.palette.background.paper,\n  border: `1px solid ${theme.palette.divider}`,\n}));\n\nexport const ButtonContainer = styled(Box)(({ theme }) => ({\n  display: 'flex',\n  gap: theme.spacing(2),\n  marginTop: theme.spacing(2),\n}));",
@@ -35,7 +19,7 @@
     {
       "path": "package.json",
       "action": "INSERT_AFTER",
-      "content": "    \"@mui/icons-material\": \"^7.3.5\",\n    \"@mui/material\": \"^7.3.5\",\n    \"@mui/styled-engine-sc\": \"^7.3.5\",\n    \"styled-components\": \"^6.1.19\",",
+      "content": "    \"@mui/icons-material\": \"^7.3.5\",\n    \"@mui/material\": \"^7.3.5\",\n",
       "pattern": "  \"dependencies\": {"
     },
     {
@@ -105,7 +89,16 @@
       "path": "vite.config.ts",
       "action": "INSERT_AFTER",
       "content": "        '@mui/styled-engine': '@mui/styled-engine-sc',",
-      "pattern": "      alias: {"
+      "pattern": "      alias: {",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_EXISTS",
+            "value": "styled-components"
+          }
+        ],
+        "logic": "AND"
+      }
     },
     {
       "path": "src/main.tsx",
@@ -124,13 +117,28 @@
       "action": "REPLACE_CONTENT",
       "content": "'Vite', 'MUI', 'Styled Components'",
       "pattern": "'Vite'",
-      "replacement": "'Vite', 'MUI', 'Styled Components'"
+      "replacement": "'Vite', 'MUI'"
     },
     {
       "path": "src/main.tsx",
       "action": "REPLACE_CONTENT",
       "pattern": "StrictMode, useEffect",
       "replacement": "StrictMode, useEffect, useState"
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "   \"@mui/styled-engine-sc\": \"^7.3.5\",\n    \"styled-components\": \"^6.1.19\",",
+      "pattern": "  \"dependencies\": {",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_EXISTS",
+            "value": "styled-components"
+          }
+        ],
+        "logic": "AND"
+      }
     }
   ]
 }
