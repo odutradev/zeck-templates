@@ -154,6 +154,25 @@
         ],
         "logic": "AND"
       }
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "INSERT_AFTER",
+      "content": "'React', 'TypeScript', 'Vite', 'Styled Components'",
+      "pattern": "'React', 'TypeScript', 'Vite'",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_EXISTS",
+            "value": "styled-components"
+          },
+          {
+            "type": "PATTERN_NOT_EXISTS",
+            "value": ", 'Styled Components'"
+          }
+        ],
+        "logic": "AND"
+      }
     }
   ]
 }
