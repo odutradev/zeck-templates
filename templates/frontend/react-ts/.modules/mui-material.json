@@ -19,7 +19,7 @@
     {
       "path": "package.json",
       "action": "INSERT_AFTER",
-      "content": "    \"@mui/icons-material\": \"^7.3.5\",\n    \"@mui/material\": \"^7.3.5\",\n    \"@emotion/react\": \"^11.14.0\",\n    \"@emotion/styled\": \"^11.14.1\",",
+      "content": "    \"@mui/icons-material\": \"^7.3.5\",\n    \"@mui/material\": \"^7.3.5\",",
       "pattern": "  \"dependencies\": {"
     },
     {
@@ -128,12 +128,27 @@
     {
       "path": "package.json",
       "action": "INSERT_AFTER",
-      "content": "   \"@mui/styled-engine-sc\": \"^7.3.5\",\n    \"styled-components\": \"^6.1.19\",",
+      "content": "   \"@mui/styled-engine-sc\": \"^7.3.5\",",
       "pattern": "  \"dependencies\": {",
       "condition": {
         "conditions": [
           {
             "type": "MODULE_EXISTS",
+            "value": "styled-components"
+          }
+        ],
+        "logic": "AND"
+      }
+    },
+    {
+      "path": "package.json",
+      "action": "INSERT_AFTER",
+      "content": "    \"@emotion/react\": \"^11.14.0\",\n    \"@emotion/styled\": \"^11.14.1\",",
+      "pattern": " \"dependencies\": {",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_NOT_EXISTS",
             "value": "styled-components"
           }
         ],
