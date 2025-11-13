@@ -115,7 +115,7 @@
     {
       "path": "src/pages/main/index.tsx",
       "action": "REPLACE_CONTENT",
-      "content": "'Vite', 'MUI', 'Styled Components'",
+      "content": "'Vite', 'MUI'",
       "pattern": "'Vite'",
       "replacement": "'Vite', 'MUI'"
     },
