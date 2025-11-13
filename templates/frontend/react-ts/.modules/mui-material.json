@@ -19,7 +19,7 @@
     {
       "path": "package.json",
       "action": "INSERT_AFTER",
-      "content": "    \"@mui/icons-material\": \"^7.3.5\",\n    \"@mui/material\": \"^7.3.5\",\n",
+      "content": "    \"@mui/icons-material\": \"^7.3.5\",\n    \"@mui/material\": \"^7.3.5\",\n    \"@emotion/react\": \"^11.14.0\",\n    \"@emotion/styled\": \"^11.14.1\",",
       "pattern": "  \"dependencies\": {"
     },
     {
