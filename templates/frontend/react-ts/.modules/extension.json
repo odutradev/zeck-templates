@@ -190,14 +190,14 @@
       "path": "src/stores/system/index.tsx",
       "action": "REPLACE_CONTENT",
       "pattern": "createJSONStorage(() => localStorage)",
-      "replacement": " {         getItem: async (key: string) => {           const result = await storage.get<string>(key);           return result ? (JSON.parse(result) as { state: IExtensionStore }) : null;         },         setItem: async (key: string, value: { state: IExtensionStore }) => {           await storage.set(key, JSON.stringify(value));         },         removeItem: async (key: string) => {           await storage.remove(key);         },       },"
+      "replacement": "{\n        getItem: async (key: string) => {\n          const result = await storage.get<string>(key);\n          return result\n            ? (JSON.parse(result) as { state: SystemStore })\n            : null;\n        },\n        setItem: async (key: string, value: { state: SystemStore }) => {\n          await storage.set(key, JSON.stringify(value));\n        },\n        removeItem: async (key: string) => {\n          await storage.remove(key);\n        },\n      }"
     },
     {
       "path": "vite.config.ts",
       "action": "REPLACE_CONTENT",
       "content": "index: path.resolve(__dirname, 'index.html')",
       "pattern": "index: path.resolve(__dirname, 'index.html')",
-      "replacement": "index: path.resolve(__dirname, 'index.html'),\\n\\noptions: path.resolve(__dirname, 'index.html')"
+      "replacement": "          index: path.resolve(__dirname, 'index.html'),\n          options: path.resolve(__dirname, 'index.html')"
     },
     {
       "path": "src/styles/globalStyles.ts",
@@ -217,6 +217,12 @@
         ],
         "logic": "AND"
       }
+    },
+    {
+      "path": "src/stores/system/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": ", createJSONStorage ",
+      "replacement": " "
     }
   ]
 }
