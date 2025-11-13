@@ -115,7 +115,7 @@
     {
       "path": "src/pages/main/index.tsx",
       "action": "REPLACE_CONTENT",
-      "content": "'Vite', 'MUI'",
+      "content": "'Vite', 'MUI', 'Styled Components'",
       "pattern": "'Vite'",
       "replacement": "'Vite', 'MUI'"
     },
@@ -157,9 +157,10 @@
     },
     {
       "path": "src/pages/main/index.tsx",
-      "action": "INSERT_AFTER",
+      "action": "REPLACE_CONTENT",
       "content": "'React', 'TypeScript', 'Vite', 'Styled Components'",
       "pattern": "'React', 'TypeScript', 'Vite'",
+      "replacement": "'React', 'TypeScript', 'Vite', 'Styled Components'",
       "condition": {
         "conditions": [
           {
