@@ -46,6 +46,21 @@
       "content": "count + 1",
       "pattern": "(count) => count + 1",
       "replacement": "count + 1"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "import { useState } from 'react';",
+      "replacement": " ",
+      "condition": {
+        "conditions": [
+          {
+            "type": "PATTERN_NOT_EXISTS",
+            "value": "useState("
+          }
+        ],
+        "logic": "AND"
+      }
     }
   ]
 }
