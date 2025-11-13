@@ -53,7 +53,7 @@
           {
             "name": "extension",
             "description": "",
-            "excludes": ["zustand"],
+            "includes": ["zustand"],
             "path": "./.modules/extension.json",
             "priority": 1
           }
