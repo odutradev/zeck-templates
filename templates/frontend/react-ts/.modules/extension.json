@@ -166,18 +166,38 @@
       "path": "src/pages/main/styles.css",
       "action": "INSERT_AFTER",
       "content": "        body {\n            min-height: 450px;\n            min-width: 400px;\n        };",
-      "pattern": "body{\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n"
-    },
-    {
-      "path": "src/stores/system/index.tsx",
-      "action": "REPLACE_CONTENT",
-      "pattern": "createJSONStorage(() => localStorage)",
-      "replacement": "{         getItem: async (key: string) => {           const result = await storage.get<string>(key);           return result ? (JSON.parse(result) as { state: ExtensionStore }) : null;         },         setItem: async (key: string, value: { state: ExtensionStore }) => {           await storage.set(key, JSON.stringify(value));         },         removeItem: async (key: string) => {           await storage.remove(key);         },       },"
+      "pattern": "body{\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_NOT_EXISTS",
+            "value": "styled-components"
+          },
+          {
+            "type": "FILE_EXISTS",
+            "target": "src/pages/main/styles.css"
+          }
+        ],
+        "logic": "AND"
+      }
     },
     {
       "path": "src/stores/system/index.tsx",
       "action": "INSERT_IMPORT",
       "content": "import storage from \"@utils/functions/storage\";"
+    },
+    {
+      "path": "src/stores/system/index.tsx",
+      "action": "REPLACE_CONTENT",
+      "pattern": "createJSONStorage(() => localStorage)",
+      "replacement": " {         getItem: async (key: string) => {           const result = await storage.get<string>(key);           return result ? (JSON.parse(result) as { state: IExtensionStore }) : null;         },         setItem: async (key: string, value: { state: IExtensionStore }) => {           await storage.set(key, JSON.stringify(value));         },         removeItem: async (key: string) => {           await storage.remove(key);         },       },"
+    },
+    {
+      "path": "vite.config.ts",
+      "action": "REPLACE_CONTENT",
+      "content": "index: path.resolve(__dirname, 'index.html')",
+      "pattern": "index: path.resolve(__dirname, 'index.html')",
+      "replacement": "index: path.resolve(__dirname, 'index.html'),\\n\\noptions: path.resolve(__dirname, 'index.html')"
     }
   ]
 }
