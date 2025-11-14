@@ -206,9 +206,8 @@
     },
     {
       "path": "src/pages/main/styles.css",
-      "action": "INSERT_AFTER",
-      "content": "  min-width: 500px;\n  min-height: 450px;\n  height: auto;",
-      "pattern": "body{\n  box-sizing: border-box;",
+      "action": "INSERT_IMPORT",
+      "content": "body{\n  min-width: 500px;\n  min-height: 450px;\n  height: auto;\n}",
       "condition": {
         "conditions": [
           {
