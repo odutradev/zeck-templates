@@ -163,25 +163,6 @@
       "content": "import Main from \"@pages/main\";\n\ninterface Route {\n    type?: 'auth' | 'admin' | null;\n    component: any;\n    path: string;\n};\n\nconst routes: Route[] = [\n    {\n        path: \"index.html\",\n        component: <Main/>,\n        type: null\n    }\n];\n\nexport default routes;"
     },
     {
-      "path": "src/pages/main/styles.css",
-      "action": "INSERT_AFTER",
-      "content": "        body {\n            min-height: 450px;\n            min-width: 400px;\n        };",
-      "pattern": "body{\n  box-sizing: border-box;\n  padding: 0;\n  margin: 0;\n}\n",
-      "condition": {
-        "conditions": [
-          {
-            "type": "MODULE_NOT_EXISTS",
-            "value": "styled-components"
-          },
-          {
-            "type": "FILE_EXISTS",
-            "target": "src/pages/main/styles.css"
-          }
-        ],
-        "logic": "AND"
-      }
-    },
-    {
       "path": "src/stores/system/index.tsx",
       "action": "INSERT_IMPORT",
       "content": "import storage from \"@utils/functions/storage\";"
@@ -201,9 +182,8 @@
     },
     {
       "path": "src/styles/globalStyles.ts",
-      "action": "INSERT_AFTER",
-      "content": "        body {\n            min-height: 450px;\n            min-width: 400px;\n        };",
-      "pattern": "  *, *::before, *::after {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n  }",
+      "action": "INSERT_IMPORT",
+      "content": "body{\n  min-width: 500px;\n  min-height: 450px;\n  height: auto;\n}",
       "condition": {
         "conditions": [
           {
@@ -223,6 +203,25 @@
       "action": "REPLACE_CONTENT",
       "pattern": ", createJSONStorage ",
       "replacement": " "
+    },
+    {
+      "path": "src/pages/main/styles.css",
+      "action": "INSERT_AFTER",
+      "content": "  min-width: 500px;\n  min-height: 450px;\n  height: auto;",
+      "pattern": "body{\n  box-sizing: border-box;",
+      "condition": {
+        "conditions": [
+          {
+            "type": "FILE_EXISTS",
+            "value": "src/pages/main/styles.css"
+          },
+          {
+            "type": "MODULE_NOT_EXISTS",
+            "value": "styled-components"
+          }
+        ],
+        "logic": "AND"
+      }
     }
   ]
 }
