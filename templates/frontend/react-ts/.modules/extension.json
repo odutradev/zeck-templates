@@ -181,24 +181,6 @@
       "replacement": "          index: path.resolve(__dirname, 'index.html'),\n          options: path.resolve(__dirname, 'index.html')"
     },
     {
-      "path": "src/styles/globalStyles.ts",
-      "action": "INSERT_IMPORT",
-      "content": "body{\n  min-width: 500px;\n  min-height: 450px;\n  height: auto;\n}",
-      "condition": {
-        "conditions": [
-          {
-            "type": "MODULE_EXISTS",
-            "value": "styled-components"
-          },
-          {
-            "type": "FILE_EXISTS",
-            "value": "src/styles/globalStyles.ts"
-          }
-        ],
-        "logic": "AND"
-      }
-    },
-    {
       "path": "src/stores/system/index.tsx",
       "action": "REPLACE_CONTENT",
       "pattern": ", createJSONStorage ",
@@ -217,6 +199,21 @@
           {
             "type": "MODULE_NOT_EXISTS",
             "value": "mui-material"
+          }
+        ],
+        "logic": "AND"
+      }
+    },
+    {
+      "path": "src/styles/globalStyles.ts",
+      "action": "INSERT_AFTER",
+      "content": "body{\n  min-width: 500px;\n  min-height: 450px;\n  height: auto;\n}",
+      "pattern": "const GlobalStyles = createGlobalStyle`",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_EXISTS",
+            "value": "styled-components"
           }
         ],
         "logic": "AND"
