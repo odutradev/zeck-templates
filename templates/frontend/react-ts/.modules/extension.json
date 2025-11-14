@@ -212,12 +212,12 @@
       "condition": {
         "conditions": [
           {
-            "type": "FILE_EXISTS",
-            "value": "src/pages/main/styles.css"
+            "type": "MODULE_NOT_EXISTS",
+            "value": "styled-components"
           },
           {
             "type": "MODULE_NOT_EXISTS",
-            "value": "styled-components"
+            "value": "mui-material"
           }
         ],
         "logic": "AND"
