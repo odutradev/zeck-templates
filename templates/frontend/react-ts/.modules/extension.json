@@ -61,7 +61,7 @@
     {
       "path": "src/utils/functions/storage.ts",
       "action": "CREATE_FILE",
-      "content": "const storage = {\n    get: async <T>(key: string): Promise<T | null> => {\n        try {\n            const result = await chrome.storage.local.get([key]);\n            return result[key] || null;\n        } catch (error) {\n            console.error('[storage get]', error);\n            return null;\n        }\n    },\n    \n    set: async <T>(key: string, value: T): Promise<void> => {\n        try {\n            await chrome.storage.local.set({ [key]: value });\n        } catch (error) {\n            console.error('[storage set]', error);\n        }\n    },\n    \n    remove: async (key: string): Promise<void> => {\n        try {\n            await chrome.storage.local.remove(key);\n        } catch (error) {\n            console.error('[storage remove]', error);\n        }\n    }\n};\n\nexport default storage;"
+      "content": "const storage = {\n    get: async <T>(key: string): Promise<T | null> => {\n        try {\n            const result = await chrome.storage.local.get([key]);\n            return (result[key] as T) || null;\n        } catch (error) {\n            console.error('[storage get]', error);\n            return null;\n        }\n    },\n    \n    set: async <T>(key: string, value: T): Promise<void> => {\n        try {\n            await chrome.storage.local.set({ [key]: value });\n        } catch (error) {\n            console.error('[storage set]', error);\n        }\n    },\n    \n    remove: async (key: string): Promise<void> => {\n        try {\n            await chrome.storage.local.remove(key);\n        } catch (error) {\n            console.error('[storage remove]', error);\n        }\n    }\n};\n\nexport default storage;"
     },
     {
       "path": "src/utils/functions/messager.ts",
@@ -208,6 +208,38 @@
           {
             "type": "MODULE_EXISTS",
             "value": "styled-components"
+          }
+        ],
+        "logic": "AND"
+      }
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "INSERT_AFTER",
+      "content": "  const toggleFeature = () => {\n    setFeatureStatus('example', !features.example);\n  };",
+      "pattern": " const toggleTheme = () => {"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "INSERT_IMPORT",
+      "content": "import useExtensionStore from '@stores/extension';"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "INSERT_AFTER",
+      "content": "  const { extension: { features }, setFeatureStatus } = useExtensionStore();",
+      "pattern": "  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');"
+    },
+    {
+      "path": "src/pages/main/index.tsx",
+      "action": "INSERT_BEFORE",
+      "content": "        <Button \n          variant={features.example ? \"contained\" : \"outlined\"} \n          color={features.example ? \"success\" : \"primary\"}\n          onClick={toggleFeature}\n        >\n          Example: {features.example ? 'ON' : 'OFF'}\n        </Button>",
+      "pattern": "      </ButtonContainer>",
+      "condition": {
+        "conditions": [
+          {
+            "type": "MODULE_EXISTS",
+            "value": "mui-material"
           }
         ],
         "logic": "AND"
