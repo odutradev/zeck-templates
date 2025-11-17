@@ -215,7 +215,7 @@
     },
     {
       "path": "src/pages/main/index.tsx",
-      "action": "INSERT_AFTER",
+      "action": "INSERT_BEFORE",
       "content": "  const toggleFeature = () => {\n    setFeatureStatus('example', !features.example);\n  };",
       "pattern": " const toggleTheme = () => {"
     },
