@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "João Dutra <https://github.com/odutradev>",
   "scripts": {
-    "publish": "npx pub --bump-package --push"
+    "publish": "npx pub --bump-package --build-zip --push"
   },
   "repository": {
     "type": "git",
